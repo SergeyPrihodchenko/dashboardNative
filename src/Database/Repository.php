@@ -42,7 +42,7 @@ abstract class Repository {
         $table = static::TABLE_NAMEL;
 
         $query = <<<SQL
-            SELECT DISTINCT client_mail, client_mail_id, client_code FROM $table;
+            SELECT DISTINCT client_id, client_mail, client_mail_id, client_code FROM $table;
         SQL;
 
         $stmt = $this->pdo->prepare($query);

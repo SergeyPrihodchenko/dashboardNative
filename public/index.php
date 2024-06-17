@@ -9,6 +9,9 @@ use S\P\Templater\Stencli;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+$script = 'scripts/script.js';
+$style = 'styles/style.css';
+
 require_once __DIR__ . '/../src/Router/router.php';
 
 // $repository = new SwageloRepository();

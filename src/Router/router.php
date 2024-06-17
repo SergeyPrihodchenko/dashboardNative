@@ -1,5 +1,6 @@
 <?php
 
+use S\P\Controllers\ClientsDashboardController;
 use S\P\Database\Connect;
 use S\P\Templater\Stencli;
 
@@ -18,14 +19,41 @@ $stencli = new Stencli(__DIR__ . '/../Views');
 switch ($route) {
     case '/':
         
-        $stencli->render('templates/template', [
+        $data = ClientsDashboardController::index();
+
+        echo $stencli->render('templates/template', [
+            'title' => 'Dashboard',
             'style' => $style,
             'script' => $script,
-            $stencli->render('contents/dashboard', [])
+            'content' => $stencli->render('contents/dashboard', [
+                'data' => $data,
+            ])
+        ]);
+        break;
+        
+    case '/client':  
+        echo $stencli->render('templates/template', [
+            'title' => 'Dashboard',
+            'style' => $style,
+            'script' => $script,
+            'content' => $stencli->render('contents/clientDashboard', [])
+        ]);
+        break;
+    case '/':  
+        echo $stencli->render('templates/template', [
+            'title' => 'Dashboard',
+            'style' => $style,
+            'script' => $script,
+            'content' => $stencli->render('contents/dashboard', [])
         ]);
         break;
     
     default:
-        # code...
+        echo $stencli->render('templates/template', [
+            'title' => 'Dashboard',
+            'style' => $style,
+            'script' => $script,
+            'content' => $stencli->render('error/error', [])
+        ]);
         break;
 }
