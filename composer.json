@@ -1,0 +1,15 @@
+{
+    "name": "s/p",
+    "autoload": {
+        "psr-4": {
+            "S\\P\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "sergey",
+            "email": "s.prihodchenko@yadnex.ru"
+        }
+    ],
+    "require": {}
+}
