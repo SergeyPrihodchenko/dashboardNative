@@ -26,7 +26,7 @@
             <thead>
                 <tr>
                 <th></th>
-                <th>Email</th>
+                <th>Phone</th>
                 <th>количество созданных счетов</th>
                 <th>сумма созданных счетов</th>
                 <th>количество выставленных счетов</th>
@@ -38,7 +38,7 @@
             <tbody>
                 <?php
                     foreach ($clients as $client) {
-                        $client_mail = $client['client_mail'];
+                        $client_phone = $client['client_phone'];
                         $countCreatedBill = $client['countCreatedBill'];
                         $createdBill = $client['createdBill'];
                         $outputBill = $client['outputBill'];
@@ -49,7 +49,7 @@
                         echo <<<HTML
                             <tr>
                                 <td><a href="/client?email=$client_mail">&#11162</a></td>
-                                <td>$client_mail</td>
+                                <td>$client_phone</td>
                                 <td>$countCreatedBill</td>
                                 <td>$createdBill</td>
                                 <td>$CountOutputBill</td>

@@ -1,7 +1,9 @@
 <?php
 
 use S\P\Controllers\ClientsDashboardController;
+use S\P\Controllers\SateliDashboardController;
 use S\P\Database\Connect;
+use S\P\Http\Request;
 use S\P\Templater\Stencli;
 
 Connect::setAttributs(    
@@ -12,22 +14,32 @@ Connect::setAttributs(
     '123'
 );
 
-$route = $_SERVER['REQUEST_URI'];
+$route = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 $stencli = new Stencli(__DIR__ . '/../Views');
 
 switch ($route) {
     case '/':
         
-        $data = ClientsDashboardController::index();
+        $data = ClientsDashboardController::index(new Request());
 
         echo $stencli->render('templates/template', [
             'title' => 'Dashboard',
             'style' => $style,
             'script' => $script,
-            'content' => $stencli->render('contents/dashboard', [
-                'data' => $data,
-            ])
+            'content' => $stencli->render('contents/dashboard', $data)
+        ]);
+        break;
+
+    case '/sateli':
+        
+        $data = SateliDashboardController::index(new Request());
+
+        echo $stencli->render('templates/template', [
+            'title' => 'Dashboard',
+            'style' => $style,
+            'script' => $script,
+            'content' => $stencli->render('contents/dashboardSateli', $data)
         ]);
         break;
         
@@ -37,14 +49,6 @@ switch ($route) {
             'style' => $style,
             'script' => $script,
             'content' => $stencli->render('contents/clientDashboard', [])
-        ]);
-        break;
-    case '/':  
-        echo $stencli->render('templates/template', [
-            'title' => 'Dashboard',
-            'style' => $style,
-            'script' => $script,
-            'content' => $stencli->render('contents/dashboard', [])
         ]);
         break;
     

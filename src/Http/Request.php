@@ -2,13 +2,14 @@
 
 namespace S\P\Http;
 
-use S\P\Exceptions\RequestExeption;
+use S\P\Exceptions\RequestException;
 
 class Request {
 
+    protected array $params;
+    protected string $uri;
+
     public function __construct(
-        protected array $params,
-        protected string $uri,
     )
     {
         $this->params = $_GET;
@@ -18,7 +19,7 @@ class Request {
     public function getParam($key): mixed
     {
         if(!array_key_exists($key, $this->params)) {
-            throw new RequestExeption('not found parameter');
+            throw new RequestException('not found parameter');
 
             return null;
         } 
@@ -32,7 +33,7 @@ class Request {
 
         if(strlen($path[1]) == 0) {
 
-            throw new RequestExeption('error in request');
+            throw new RequestException('error in request');
 
             return null;
         }

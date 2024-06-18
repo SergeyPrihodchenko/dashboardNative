@@ -7,7 +7,7 @@ use S\P\Database\Repository;
 class Client {
 
     public function __construct(
-        private string $clien_id,
+        private string $client_mail,
         protected Repository $repo
     )
     {
@@ -15,26 +15,26 @@ class Client {
 
     public function getClientData($columns = '*'): array
     {
-        $data = $this->repo->getDataByClien($this->clien_id, $columns);
+        $data = $this->repo->getDataByClien($this->client_mail, $columns);
 
         return $data;
     }
 
-    public function fullPayPrice(array $columns = []): float
+    public function totalPrice(int $invoceStatus): array
     {
-        $data = $this->repo->getDataByClien($this->clien_id, $columns);
-
+        $prices = $this->repo->totalPay($this->client_mail, $invoceStatus);
+  
         $sumPay = 0;
+        $countBills = 0;
 
-        foreach ($data as $elem) {
-            
-            if($elem['invoice_status'] == 2) {
-                $sumPay += ($elem['invoice_price'] * 100);
-             }
+        foreach ($prices as $price) {
+    
+            $sumPay += ($price['invoice_price'] * 100);
+            $countBills++;
+
         }
 
-        return ($sumPay / 100);
-
+        return ['countBills' => $countBills, 'bill' => ($sumPay / 100)];
     }
 
     public static function getAllClients(Repository $repo): array
