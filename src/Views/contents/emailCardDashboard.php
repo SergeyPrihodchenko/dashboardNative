@@ -6,7 +6,8 @@
 <main class="main">
     <div class="block_dashboar">
         <div class="panel_dashboard">
-            <select name="select">
+            <select class="sites_option" name="select">
+            <option>список сайтов</option>
                 <?php
                     foreach ($sites as $site) {
                     echo <<<HTML

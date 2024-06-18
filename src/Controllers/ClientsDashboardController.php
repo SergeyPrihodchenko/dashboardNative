@@ -61,6 +61,7 @@ class ClientsDashboardController {
 
         $data['clients'] = $allClients;
         $data['sites'] = $sites;
+        $data['site'] = $ParamSite;
         $data['paramSite'] = $ParamSite;
         return $data;
     }
