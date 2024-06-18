@@ -30,16 +30,20 @@ class ClientsDashboardController {
         switch ($site) {
             case 'hylok':
                $repo = new HylokRepository();
+               $ParamSite = 'hylok';
                 break;
             case 'swagelo':
                 $repo = new SwageloRepository();
+                $ParamSite = 'swagelo';
                 break;
             case 'wika':
                 $repo = new WikaRepository();
+                $ParamSite = 'wika';
                 break;
             
             default:
                 $repo = new HylokRepository();
+                $ParamSite = 'hylok';
                 break;
         }
 
@@ -57,6 +61,7 @@ class ClientsDashboardController {
 
         $data['clients'] = $allClients;
         $data['sites'] = $sites;
+        $data['paramSite'] = $ParamSite;
         return $data;
     }
 }

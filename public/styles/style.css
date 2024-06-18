@@ -29,7 +29,7 @@ a {
   align-items: center;
 }
 .main .block_table {
-  max-height: 800px;
+  max-height: 700px;
   height: 100%;
   width: 100%;
   display: flex;

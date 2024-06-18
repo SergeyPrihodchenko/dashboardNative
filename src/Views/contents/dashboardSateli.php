@@ -7,17 +7,8 @@
     <div class="block_dashboar">
         <div class="panel_dashboard">
         <select name="select">
-            <?php
-                foreach ($sites as $site) {
-                   echo <<<HTML
-                    <option value="$site">$site</option>
-                   HTML;
-                }
-            ?>
-        </select>
-        <select name="select">
             <option value="value1">Email</option>
-            <option value="value2">Phone</option>
+            <option selected value="value2">Phone</option>
         </select>
         </div>
     </div>

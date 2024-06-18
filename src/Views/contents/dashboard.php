@@ -16,7 +16,7 @@
             ?>
         </select>
         <select name="select">
-            <option value="value1">Email</option>
+            <option selected value="value1">Email</option>
             <option value="value2">Phone</option>
         </select>
         </div>
@@ -48,7 +48,7 @@
 
                         echo <<<HTML
                             <tr>
-                                <td><a href="/client?email=$client_mail">&#11162</a></td>
+                                <td><a href="/clientCard?email=$client_mail&site=$paramSite">&#11162</a></td>
                                 <td>$client_mail</td>
                                 <td>$countCreatedBill</td>
                                 <td>$createdBill</td>

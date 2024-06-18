@@ -11,7 +11,7 @@ class SateliRepository extends Repository {
         $table = static::TABLE_NAMEL;
 
         $query = <<<SQL
-            SELECT DISTINCT client_phone, invoice_status, invoice_price FROM $table;
+            SELECT DISTINCT client_phone FROM $table;
         SQL;
 
         $stmt = $this->pdo->prepare($query);

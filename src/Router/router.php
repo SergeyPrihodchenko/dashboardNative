@@ -1,5 +1,6 @@
 <?php
 
+use S\P\Controllers\ClientCardController;
 use S\P\Controllers\ClientsDashboardController;
 use S\P\Controllers\SateliDashboardController;
 use S\P\Database\Connect;
@@ -36,19 +37,22 @@ switch ($route) {
         $data = SateliDashboardController::index(new Request());
 
         echo $stencli->render('templates/template', [
-            'title' => 'Dashboard',
+            'title' => 'Sateli',
             'style' => $style,
             'script' => $script,
             'content' => $stencli->render('contents/dashboardSateli', $data)
         ]);
         break;
         
-    case '/client':  
+    case '/clientCard':
+
+        $data = ClientCardController::index(new Request());
+
         echo $stencli->render('templates/template', [
-            'title' => 'Dashboard',
+            'title' => 'clientCard',
             'style' => $style,
             'script' => $script,
-            'content' => $stencli->render('contents/clientDashboard', [])
+            'content' => $stencli->render('contents/emailCardDashboard', $data)
         ]);
         break;
     

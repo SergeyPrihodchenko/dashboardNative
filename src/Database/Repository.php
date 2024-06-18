@@ -77,4 +77,26 @@ abstract class Repository {
         return $data;
     }
 
+    //******************************************************************LAZY */
+
+    public function lazyDownload(int $limit = 30, int $page = 1)
+    {
+        $table = static::TABLE_NAMEL;
+
+        $query = <<<SQL
+            SELECT * FROM $table LIMIT :limit OFFSET :offset;
+        SQL;
+
+        $offset = ($page - 1) * $limit;
+
+        $stmt = $this->pdo->prepare($query);
+
+        $stmt->bindValue(':limit', $limit);
+        $stmt->bindValue(':offset', $offset);
+
+        $stmt->execute();
+
+        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
 }
