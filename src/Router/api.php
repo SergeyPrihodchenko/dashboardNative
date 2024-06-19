@@ -46,10 +46,7 @@ if($method == 'POST') {
     
             echo json_encode($data);
             break;
-        
-        default:
-    
-            break;
+
     }
 
 }

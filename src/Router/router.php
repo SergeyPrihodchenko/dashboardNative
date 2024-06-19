@@ -21,6 +21,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 $stencli = new Stencli(__DIR__ . '/../Views');
 
+
 switch ($method) {
     case 'GET':
     
@@ -28,15 +29,15 @@ switch ($method) {
             case '/':
                 
                 $data = ClientsDashboardController::index(new Request());
-                $script = 'scripts/emailDashboard.js';
                 $style = 'styles/style.css';
+                $script = 'scripts/emailDashboard.js';
                 $data['modal'] = $stencli->render('components/modalClientCard');
         
                 echo $stencli->render('templates/template', [
                     'title' => 'Dashboard',
                     'style' => $style,
                     'script' => $script,
-                    'content' => $stencli->render('contents/dashboard', $data)
+                    'content' => $stencli->render('contents/dashboard', $data),
                 ]);
                 break;
         
@@ -60,6 +61,7 @@ switch ($method) {
         
                 $data = ClientCardController::index(new Request());
                 $style = 'styles/style.css';
+                $script = 'scripts/phoneDashboard.js';
         
                 echo $stencli->render('templates/template', [
                     'title' => 'clientCard',
@@ -73,6 +75,7 @@ switch ($method) {
         
                 $data = SateliCardController::index(new Request());
                 $style = 'styles/style.css';
+                $script = 'scripts/phoneDashboard.js';
         
                 echo $stencli->render('templates/template', [
                     'title' => 'clientCard',
@@ -92,6 +95,22 @@ switch ($method) {
         break;
     
     case 'POST':
-        # code...
+            switch ($route) {
+                case '/emailClientCard':
+                    
+                    $data = ClientCardController::dataByClient(new Request());
+                    echo json_encode($data);
+                    break;
+
+                case '/phoneClientCard':
+                    
+                    $data = SateliCardController::dataByClient(new Request());
+                    echo json_encode($data);
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
         break;
 }

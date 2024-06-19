@@ -52,7 +52,7 @@
 
                         echo <<<HTML
                             <tr>
-                                <td><a href="/clientCard?email=$client_mail&site=$paramSite">&#11162</a></td>
+                                <td class="btn_open_modal" data-email="$client_mail" data-site="$paramSite">&#11162</td>
                                 <td>$client_mail</td>
                                 <td>$countCreatedBill</td>
                                 <td>$createdBill</td>
