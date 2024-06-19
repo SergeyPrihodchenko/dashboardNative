@@ -4,10 +4,12 @@
     </div>
 </header>
 <main class="main">
+    <?=$modal?>
     <div class="block_dashboar">
         <div class="panel_dashboard">
-        <select name="select">
-            <option value="value1">Email</option>
+        <button id="myBtn">Open Modal</button>
+        <select class="type_option" name="select">
+            <option value="">Email</option>
             <option selected value="value2">Phone</option>
         </select>
         </div>
@@ -39,7 +41,7 @@
 
                         echo <<<HTML
                             <tr>
-                                <td><a href="/client?email=$client_mail">&#11162</a></td>
+                                <td><a href="/phoneClientCard?phone=$client_phone">&#11162</a></td>
                                 <td>$client_phone</td>
                                 <td>$countCreatedBill</td>
                                 <td>$createdBill</td>

@@ -2,6 +2,7 @@
 
 use S\P\Controllers\ClientCardController;
 use S\P\Controllers\ClientsDashboardController;
+use S\P\Controllers\SateliCardController;
 use S\P\Controllers\SateliDashboardController;
 use S\P\Database\Connect;
 use S\P\Http\Request;
@@ -16,52 +17,81 @@ Connect::setAttributs(
 );
 
 $route = parse_url($_SERVER['REQUEST_URI'])['path'];
+$method = $_SERVER['REQUEST_METHOD'];
 
 $stencli = new Stencli(__DIR__ . '/../Views');
 
-switch ($route) {
-    case '/':
+switch ($method) {
+    case 'GET':
+    
+        switch ($route) {
+            case '/':
+                
+                $data = ClientsDashboardController::index(new Request());
+                $script = 'scripts/emailDashboard.js';
+                $style = 'styles/style.css';
+                $data['modal'] = $stencli->render('components/modalClientCard');
         
-        $data = ClientsDashboardController::index(new Request());
-
-        echo $stencli->render('templates/template', [
-            'title' => 'Dashboard',
-            'style' => $style,
-            'script' => $script,
-            'content' => $stencli->render('contents/dashboard', $data)
-        ]);
-        break;
-
-    case '/sateli':
+                echo $stencli->render('templates/template', [
+                    'title' => 'Dashboard',
+                    'style' => $style,
+                    'script' => $script,
+                    'content' => $stencli->render('contents/dashboard', $data)
+                ]);
+                break;
         
-        $data = SateliDashboardController::index(new Request());
-
-        echo $stencli->render('templates/template', [
-            'title' => 'Sateli',
-            'style' => $style,
-            'script' => $script,
-            'content' => $stencli->render('contents/dashboardSateli', $data)
-        ]);
-        break;
+            case '/sateli':
+                
+                $data = SateliDashboardController::index(new Request());
+                $title = 'Sateli';
+                $script = 'scripts/phoneDashboard.js';
+                $style = 'styles/style.css';
+                $data['modal'] = $stencli->render('components/modalClientCard');
         
-    case '/clientCard':
+                echo $stencli->render('templates/template', [
+                    'title' => 'Sateli',
+                    'style' => $style,
+                    'script' => $script,
+                    'content' => $stencli->render('contents/dashboardSateli', $data)
+                ]);
+                break;
+                
+            case '/emailClientCard':
+        
+                $data = ClientCardController::index(new Request());
+                $style = 'styles/style.css';
+        
+                echo $stencli->render('templates/template', [
+                    'title' => 'clientCard',
+                    'style' => $style,
+                    'script' => $script,
+                    'content' => $stencli->render('contents/emailCardDashboard', $data)
+                ]);
+                break;
 
-        $data = ClientCardController::index(new Request());
-
-        echo $stencli->render('templates/template', [
-            'title' => 'clientCard',
-            'style' => $style,
-            'script' => $script,
-            'content' => $stencli->render('contents/emailCardDashboard', $data)
-        ]);
+            case '/phoneClientCard':
+        
+                $data = SateliCardController::index(new Request());
+                $style = 'styles/style.css';
+        
+                echo $stencli->render('templates/template', [
+                    'title' => 'clientCard',
+                    'style' => $style,
+                    'script' => $script,
+                    'content' => $stencli->render('contents/phoneCardDashboard', $data)
+                ]);
+                break;
+            
+            default:
+                echo $stencli->render('templates/template', [
+                    'title' => 'Error',
+                    'content' => $stencli->render('error/error', [])
+                ]);
+                break;
+        }
         break;
     
-    default:
-        echo $stencli->render('templates/template', [
-            'title' => 'Dashboard',
-            'style' => $style,
-            'script' => $script,
-            'content' => $stencli->render('error/error', [])
-        ]);
+    case 'POST':
+        # code...
         break;
 }

@@ -11,7 +11,6 @@ class SateliDashboardController {
     {
         $allClients = ClientSateli::getAllClients(new SateliRepository);
         foreach ($allClients as $key => $client) {
-            
             $client = new ClientSateli($client['client_phone'], new SateliRepository);
             $allClients[$key]['createdBill'] = $client->totalPrice(0)['bill'];
             $allClients[$key]['outputBill'] = $client->totalPrice(1)['bill'];
@@ -22,7 +21,7 @@ class SateliDashboardController {
         }
 
         $data['clients'] = $allClients;
-        // $data['sites'] = $sites;
+
         return $data;
     }
 }

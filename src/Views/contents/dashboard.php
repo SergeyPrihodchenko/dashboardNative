@@ -4,9 +4,11 @@
     </div>
 </header>
 <main class="main">
+    <?=$modal?>
     <div class="block_dashboar">
         <div class="panel_dashboard">
             <h1><?=$site?></h1>
+            <button id="myBtn">Open Modal</button>
         <select class="sites_option" name="sites">
             <option>список сайтов</option>
             <?php
@@ -17,9 +19,9 @@
                 }
             ?>
         </select>
-        <select name="select">
-            <option selected value="value1">Email</option>
-            <option value="value2">Phone</option>
+        <select class="type_option" name="select">
+            <option selected value="">Email</option>
+            <option value="sateli">Phone</option>
         </select>
         </div>
     </div>

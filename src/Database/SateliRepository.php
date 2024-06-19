@@ -46,4 +46,29 @@ class SateliRepository extends Repository {
         return $data;
     }
 
+    public function getDataByClien(string $client_phone, $columns = '*'): array
+    {
+        if(is_array($columns) && count($columns)) {
+
+            $columns = implode(' ,', $columns);
+
+        }
+
+        $table = static::TABLE_NAMEL;
+        
+        $query = <<<SQL
+            SELECT $columns FROM $table WHERE client_phone = :client_phone;
+        SQL;
+
+        $stmt = $this->pdo->prepare($query);
+
+        $stmt->bindParam(':client_phone', $client_phone);
+
+        $stmt->execute();
+
+        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $data;
+    }
+
 }
