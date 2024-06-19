@@ -19,10 +19,16 @@ document.addEventListener('DOMContentLoaded', (e) => {
             .then(async res => {
                 modal.style.display = "block"
                 const data = await res.json()
+                const title = document.querySelector('.m_site_title')
+                const clientEmail = document.querySelector('.m_client_email')
+
+                title.textContent = data.site
+                clientEmail.textContent = data.clientEmail
+
                 const table = modal.querySelector("tbody");
                 data.clientData.map((el) => {
                     const tr = document.createElement('tr');
-                    
+              
                     for (const key in el) {
                         const td = document.createElement('td');
                         td.textContent = el[key]

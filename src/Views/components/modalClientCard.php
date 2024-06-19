@@ -5,8 +5,8 @@
     <span class="close">&times;</span>
     <div class="block_dashboar">
         <div class="panel_dashboard">
-            <h1>$site</h1>
-            <h2>$clientMail</h2>
+            <h1 class="m_site_title"></h1>
+            <h2 class="m_client_email"></h2>
         </div>
     </div>
     <div class="block_table">

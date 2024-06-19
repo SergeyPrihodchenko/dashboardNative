@@ -87,7 +87,7 @@ class ClientCardController {
             'invoice_price'
          ]);
 
-        $data['clientMail'] = $clientMail;
+        $data['clientEmail'] = $clientMail;
         $data['site'] = $site;
         $data['clientData'] = $clientData;
 
