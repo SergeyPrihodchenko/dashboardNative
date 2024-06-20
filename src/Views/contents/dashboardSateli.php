@@ -27,18 +27,10 @@
                 <th>сума оплаченных счетов</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php
-                    foreach ($clients as $client) {
-                        $client_phone = $client['client_phone'];
-                        $countCreatedBill = $client['countCreatedBill'];
-                        $createdBill = $client['createdBill'];
-                        $outputBill = $client['outputBill'];
-                        $CountOutputBill = $client['countOutputBill'];
-                        $closeBill = $client['closeBill'];
-                        $countCloseBill = $client['countCloseBill'];
+            <tbody class="phone_tbody">
 
-                        echo <<<HTML
+
+
                             <tr>
                                 <td><a href="/phoneClientCard?phone=$client_phone">&#11162</a></td>
                                 <td>$client_phone</td>
@@ -49,9 +41,8 @@
                                 <td>$countCloseBill</td>
                                 <td>$closeBill</td>
                             </tr>
-                        HTML;
-                    }
-                ?>
+
+
             </tbody>
         </table>
     </div>

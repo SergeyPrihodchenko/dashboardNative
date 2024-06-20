@@ -32,6 +32,8 @@ class ClientsDashboardController {
 
         try {
             $site = $request->getPostData('titleSite');
+            $limit = 30;
+            $page = $request->getPostData('page');
 
         } catch (RequestException $e) {
             $site = 'default';
@@ -57,7 +59,7 @@ class ClientsDashboardController {
                 break;
         }
 
-        $allClients = Client::getAllClients($repo);
+        $allClients = Client::getAllClients($repo, $limit = 50, $page = 1);
         foreach ($allClients as $key => $client) {
             
             $client = new Client($client['client_mail'], $repo);

@@ -37,5 +37,4 @@ class ClientSateli extends Client {
 
         return ['countBills' => $countBills, 'bill' => ($sumPay / 100)];
     }
-
 }

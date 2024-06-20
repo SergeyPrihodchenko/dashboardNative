@@ -1,30 +1,101 @@
-const typeOption = document.querySelector('.type_option');
+window.addEventListener('DOMContentLoaded', () => {
+  const phoneTbody = document.querySelector('.phone_tbody');
+  const typeOption = document.querySelector('.type_option');
+  const modal = document.getElementById("myModal");
+  const span = document.getElementsByClassName("close")[0];
 
-typeOption.addEventListener('change', (e) => {
-    window.location.href = '/'+e.target.value
-});
 
-var modal = document.getElementById("myModal");
+  maiPhoneRender(phoneTbody)
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+  phoneTbody.addEventListener('click', (e) => {
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+    if(e.target.classList.contains('btn_open_modal')) {
+      const data = new FormData();
+            data.append('phone', e.target.dataset.clientPhone)
 
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
+            fetch('/phoneClientCard', {
+                method: 'POST',
+                body: data
+            })
+            .then(async res => {
+                modal.style.display = "block"
+                const data = await res.json()
+                console.log(data);
+                const clientMail = document.querySelector('.m_client_mail')
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
+                clientMail.textContent = data.phone
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
+                const table = modal.querySelector("tbody")
+                table.innerHTML = ''
+
+                data.clientData.map((el) => {
+                    const tr = document.createElement('tr')
+              
+                    for (const key in el) {
+                        const td = document.createElement('td')
+                        td.textContent = el[key]
+                        tr.appendChild(td)
+                    }
+
+                    table.appendChild(tr)
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+})
+
+  typeOption.addEventListener('change', (e) => {
+      window.location.href = '/'+e.target.value
+  });
+
+
+
+  span.onclick = function() {
     modal.style.display = "none";
   }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+})
+
+
+const maiPhoneRender = (domElem, contentClear = true) => {
+
+  fetch('/phoneDashboardData', {
+      method: 'POST',
+  })
+  .then(async res => {
+      
+      if(contentClear) {
+        domElem.innerHTML = ''
+      }
+
+      const data = await res.json();
+      console.log(data);
+      data.clients.map((el) => {
+      const tdLink = document.createElement('td');
+      const tr = document.createElement('tr');
+
+      tdLink.dataset.clientPhone = el.client_phone
+      tdLink.classList.add('btn_open_modal')
+      tdLink.innerHTML = '&#11162'
+      tr.appendChild(tdLink)
+  
+      for (const key in el) {
+          const td = document.createElement('td');
+          td.textContent = el[key]
+          tr.appendChild(td)
+      }
+      domElem.appendChild(tr)
+      });
+  })
+  .catch(err => {
+      console.log(err);
+  })
 }

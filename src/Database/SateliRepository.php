@@ -6,15 +6,20 @@ class SateliRepository extends Repository {
 
     protected const TABLE_NAMEL = 'fluidline_sateli_InvoiceCallList';
 
-    public function getLayoutClients(): array
+    public function getLayoutClients(int $limit = 30, int $page = 2): array
     {
         $table = static::TABLE_NAMEL;
 
         $query = <<<SQL
-            SELECT DISTINCT client_phone FROM $table;
+            SELECT DISTINCT client_phone FROM $table LIMIT :limit OFFSET :offset;
         SQL;
 
+        $offset = ($page - 1) * $limit;
+
         $stmt = $this->pdo->prepare($query);
+
+        $stmt->bindParam(':limit', $limit, \PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
 
         $stmt->execute();
 
@@ -46,7 +51,7 @@ class SateliRepository extends Repository {
         return $data;
     }
 
-    public function getDataByClien(string $client_phone, $columns = '*'): array
+    public function getDataByClien(string $client_phone, $columns = '*', $limit = 30, $page = 1): array
     {
         if(is_array($columns) && count($columns)) {
 

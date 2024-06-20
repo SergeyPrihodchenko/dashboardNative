@@ -3,13 +3,21 @@
 namespace S\P\Controllers;
 
 use S\P\Database\SateliRepository;
+use S\P\Http\Request;
 use S\P\Models\ClientSateli;
 
 class SateliDashboardController {
 
-    public static function index(): array
+    public static function index()
     {
-        $allClients = ClientSateli::getAllClients(new SateliRepository);
+
+    }
+
+    public static function phoneDashboardData(Request $request): array
+    {
+        $limit = 30;
+        $page = 1;
+        $allClients = ClientSateli::getAllClients(new SateliRepository, $limit, $page);
         foreach ($allClients as $key => $client) {
             $client = new ClientSateli($client['client_phone'], new SateliRepository);
             $allClients[$key]['createdBill'] = $client->totalPrice(0)['bill'];

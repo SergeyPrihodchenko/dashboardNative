@@ -12,21 +12,27 @@ abstract class Repository {
         $this->pdo = Connect::getInstance();
     }
 
-    public function getDataByClien(string $client_mail, $columns = '*'): array
+    public function getDataByClien(string $client_mail, $columns = '*', $limit = 5, $page = 1): array
     {
+        $table = static::TABLE_NAMEL;
+
         if(is_array($columns) && count($columns)) {
 
             $columns = implode(' ,', $columns);
 
         }
 
-        $table = static::TABLE_NAMEL;
+        $offset = ($page - 1) * $limit;
         
         $query = <<<SQL
-            SELECT $columns FROM $table WHERE client_mail = :client_mail;
+            SELECT $columns FROM $table WHERE client_mail = :client_mail
+            LIMIT :limit OFFSET :offset;
         SQL;
 
         $stmt = $this->pdo->prepare($query);
+
+        $stmt->bindParam(':limit', $limit, \PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
 
         $stmt->bindParam(':client_mail', $client_mail);
 
@@ -37,15 +43,20 @@ abstract class Repository {
         return $data;
     }
 
-    public function getLayoutClients(): array
+    public function getLayoutClients(int $limit = 30, int $page = 1): array
     {
         $table = static::TABLE_NAMEL;
 
         $query = <<<SQL
-            SELECT DISTINCT client_id, client_mail, client_mail_id, client_code FROM $table;
+            SELECT DISTINCT client_id, client_mail, client_mail_id, client_code FROM $table LIMIT :limit OFFSET :offset;
         SQL;
 
+        $offset = ($page - 1) * $limit;
+
         $stmt = $this->pdo->prepare($query);
+
+        $stmt->bindParam(':limit', $limit, \PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
 
         $stmt->execute();
 
@@ -79,8 +90,15 @@ abstract class Repository {
 
     //******************************************************************LAZY */
 
-    public function lazyDownload(int $limit = 30, int $page = 1)
+    public function lazyDownload(int $limit = 30, int $page = 1, $columns = '*')
     {
+
+        if(is_array($columns) && count($columns)) {
+
+            $columns = implode(' ,', $columns);
+
+        }
+
         $table = static::TABLE_NAMEL;
 
         $query = <<<SQL

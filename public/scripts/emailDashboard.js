@@ -4,19 +4,29 @@ document.addEventListener('DOMContentLoaded', (e) => {
     const clientsTable = document.querySelector('.email_tbody');
     const modal = document.getElementById("myModal");
     const span = document.getElementsByClassName("close")[0];
+    const modalTable = modal.querySelector('.block_table');
 
-
-
-    mainEmailRender(clientsTable);
+    mainEmailRender(clientsTable)
 
     siteOption.addEventListener('change', (e) => {
 
-        mainEmailRender(clientsTable, e.target.value);
+        const data = new FormData
+        data.append('titleSite', e.target.value)
+        data.append('page', 1)
+
+        mainEmailRender(clientsTable, data)
 
     })
 
 
-    
+    modalTable.addEventListener('scroll', (e) => {
+        console.log(e.target.scrollTop);
+        const scrollHeight = e.target.scrollHeight;
+        // Получаем видимую высоту элемента
+        const clientHeight = e.target.clientHeight;
+        console.log(scrollHeight);
+        console.log(clientHeight);
+    })
 
 
     typeOption.addEventListener('change', (e) => {
@@ -33,11 +43,11 @@ document.addEventListener('DOMContentLoaded', (e) => {
         }
     }
 
-    document.addEventListener('click', (e) => {
+    clientsTable.addEventListener('click', (e) => {
 
         if(e.target.classList.contains('btn_open_modal')) {
             const data = new FormData();
-            data.append('email', e.target.dataset.clientEmail)
+            data.append('email', e.target.dataset.clientMail)
             data.append('site', e.target.dataset.site)
 
             fetch('/emailClientCard', {
@@ -48,17 +58,19 @@ document.addEventListener('DOMContentLoaded', (e) => {
                 modal.style.display = "block"
                 const data = await res.json()
                 const title = document.querySelector('.m_site_title')
-                const clientEmail = document.querySelector('.m_client_email')
+                const clientMail = document.querySelector('.m_client_mail')
 
                 title.textContent = data.site
-                clientEmail.textContent = data.clientEmail
+                clientMail.textContent = data.clientMail
 
-                const table = modal.querySelector("tbody");
+                const table = modal.querySelector("tbody")
+                table.innerHTML = ''
+
                 data.clientData.map((el) => {
-                    const tr = document.createElement('tr');
+                    const tr = document.createElement('tr')
               
                     for (const key in el) {
-                        const td = document.createElement('td');
+                        const td = document.createElement('td')
                         td.textContent = el[key]
                         tr.appendChild(td)
                     }
@@ -75,13 +87,15 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
 })
 
-const mainEmailRender = (elem, titleSite = 'hylok') => {
+const mainEmailRender = (domElem, titleSite) => {
+
     fetch('/emailDashboardData', {
         method: 'POST',
 
         body: titleSite
     })
     .then(async res => {
+        domElem.innerHTML = '';
 
         const data = await res.json();
 
@@ -90,7 +104,7 @@ const mainEmailRender = (elem, titleSite = 'hylok') => {
         const tr = document.createElement('tr');
 
         tdLink.dataset.site = data.site
-        tdLink.dataset.clientEmail = el.client_mail
+        tdLink.dataset.clientMail = el.client_mail
         tdLink.classList.add('btn_open_modal')
         tdLink.innerHTML = '&#11162'
         tr.appendChild(tdLink)
@@ -100,11 +114,18 @@ const mainEmailRender = (elem, titleSite = 'hylok') => {
             td.textContent = el[key]
             tr.appendChild(td)
         }
-        elem.appendChild(tr)
-    });
+        domElem.appendChild(tr)
+        });
 
     })
     .catch(err => {
         console.log(err);
+    })
+}
+
+function scrollUploader(domElem) {
+
+    domElem.addEventListener('scroll', e => {
+        console.log(e.target);
     })
 }

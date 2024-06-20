@@ -37,9 +37,9 @@ class Client {
         return ['countBills' => $countBills, 'bill' => ($sumPay / 100)];
     }
 
-    public static function getAllClients(Repository $repo): array
+    public static function getAllClients(Repository $repo, $limit, $page): array
     {
-        $data = $repo->getLayoutClients();
+        $data = $repo->getLayoutClients($limit, $page);
 
         return $data;
     }

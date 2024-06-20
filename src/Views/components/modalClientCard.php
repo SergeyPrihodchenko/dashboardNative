@@ -6,11 +6,11 @@
     <div class="block_dashboar">
         <div class="panel_dashboard">
             <h1 class="m_site_title"></h1>
-            <h2 class="m_client_email"></h2>
+            <h2 class="m_client_mail"></h2>
         </div>
     </div>
     <div class="block_table">
-        <table>
+        <table class="m_table">
             <thead>
                 <tr>
                 <th>client_id</th>
@@ -25,10 +25,9 @@
                 </tr>
             </thead>
             <tbody>
-              <tr>
-              </tr>
             </tbody>
         </table>
+        <div class="loader"></div>
     </div>
   </div>
 

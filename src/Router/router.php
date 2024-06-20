@@ -43,7 +43,7 @@ switch ($method) {
         
             case '/sateli':
                 
-                $data = SateliDashboardController::index(new Request());
+                $data = [];
                 $title = 'Sateli';
                 $script = 'scripts/phoneDashboard.js';
                 $style = 'styles/style.css';
@@ -96,6 +96,7 @@ switch ($method) {
     
     case 'POST':
             switch ($route) {
+//***************************************************EMAIL POST */
                 case '/emailDashboardData':
                     
                     $data = ClientsDashboardController::emailDashboardData(new Request);
@@ -107,6 +108,12 @@ switch ($method) {
                     $data = ClientCardController::dataByClient(new Request());
                     echo json_encode($data);
                     break;
+//*****************************************************PHONE POST */
+                    case '/phoneDashboardData':
+                    
+                        $data = SateliDashboardController::phoneDashboardData(new Request);
+                        echo json_encode($data);
+                        break;
 
                 case '/phoneClientCard':
                     
