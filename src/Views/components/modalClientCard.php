@@ -26,15 +26,6 @@
             </thead>
             <tbody>
               <tr>
-                  <td>$client_id</td>
-                  <td>$fluid_tag</td>
-                  <td>$client_mail_id</td>
-                  <td>$client_code</td>
-                  <td>$invoice_id</td>
-                  <td>$invoice_status</td>
-                  <td>$invoice_number</td>
-                  <td>$invoice_date</td>
-                  <td>$invoice_price</td>
               </tr>
             </tbody>
         </table>

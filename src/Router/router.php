@@ -96,6 +96,12 @@ switch ($method) {
     
     case 'POST':
             switch ($route) {
+                case '/emailDashboardData':
+                    
+                    $data = ClientsDashboardController::emailDashboardData(new Request);
+                    echo json_encode($data);
+                    break;
+
                 case '/emailClientCard':
                     
                     $data = ClientCardController::dataByClient(new Request());

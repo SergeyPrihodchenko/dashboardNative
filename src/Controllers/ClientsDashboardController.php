@@ -21,8 +21,18 @@ class ClientsDashboardController {
             'wika'
         ];
 
+        $data['sites'] = $sites;
+
+        return $data;
+    }
+
+    public static function emailDashboardData(Request $request): array
+    {
+        $data = [];
+
         try {
-            $site = $request->getParam('titleSite');
+            $site = $request->getPostData('titleSite');
+
         } catch (RequestException $e) {
             $site = 'default';
         }
@@ -60,9 +70,9 @@ class ClientsDashboardController {
         }
 
         $data['clients'] = $allClients;
-        $data['sites'] = $sites;
         $data['site'] = $ParamSite;
         $data['paramSite'] = $ParamSite;
+
         return $data;
     }
 }

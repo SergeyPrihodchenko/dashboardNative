@@ -7,7 +7,6 @@
     <?=$modal?>
     <div class="block_dashboar">
         <div class="panel_dashboard">
-        <button id="myBtn">Open Modal</button>
         <select class="type_option" name="select">
             <option value="">Email</option>
             <option selected value="value2">Phone</option>

@@ -1,15 +1,43 @@
 document.addEventListener('DOMContentLoaded', (e) => {
-
     const siteOption = document.querySelector('.sites_option');
     const typeOption = document.querySelector('.type_option');
+    const clientsTable = document.querySelector('.email_tbody');
     const modal = document.getElementById("myModal");
     const span = document.getElementsByClassName("close")[0];
 
 
+
+    mainEmailRender(clientsTable);
+
+    siteOption.addEventListener('change', (e) => {
+
+        mainEmailRender(clientsTable, e.target.value);
+
+    })
+
+
+    
+
+
+    typeOption.addEventListener('change', (e) => {
+        window.location.href = '/'+e.target.value
+    });
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
     document.addEventListener('click', (e) => {
+
         if(e.target.classList.contains('btn_open_modal')) {
             const data = new FormData();
-            data.append('email', e.target.dataset.email)
+            data.append('email', e.target.dataset.clientEmail)
             data.append('site', e.target.dataset.site)
 
             fetch('/emailClientCard', {
@@ -45,26 +73,38 @@ document.addEventListener('DOMContentLoaded', (e) => {
             
     });
 
-
-    if(siteOption) {
-        siteOption.addEventListener('change', (e) => {
-            window.location.href = '/?titleSite='+e.target.value
-        });
-    }
-
-    typeOption.addEventListener('change', (e) => {
-        window.location.href = '/'+e.target.value
-    });
-
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
 })
 
+const mainEmailRender = (elem, titleSite = 'hylok') => {
+    fetch('/emailDashboardData', {
+        method: 'POST',
 
+        body: titleSite
+    })
+    .then(async res => {
+
+        const data = await res.json();
+
+        data.clients.map((el) => {
+        const tdLink = document.createElement('td');
+        const tr = document.createElement('tr');
+
+        tdLink.dataset.site = data.site
+        tdLink.dataset.clientEmail = el.client_mail
+        tdLink.classList.add('btn_open_modal')
+        tdLink.innerHTML = '&#11162'
+        tr.appendChild(tdLink)
+    
+        for (const key in el) {
+            const td = document.createElement('td');
+            td.textContent = el[key]
+            tr.appendChild(td)
+        }
+        elem.appendChild(tr)
+    });
+
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}

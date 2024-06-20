@@ -8,6 +8,6 @@
 </head>
 <body>
     <?=$content?>
-    <script src="<?=$script?>"></script>
+    <script type="module" src="<?=$script?>"></script>
 </body>
 </html>

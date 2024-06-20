@@ -8,9 +8,7 @@
     <div class="block_dashboar">
         <div class="panel_dashboard">
             <h1><?=$site?></h1>
-            <button id="myBtn">Open Modal</button>
         <select class="sites_option" name="sites">
-            <option>список сайтов</option>
             <?php
                 foreach ($sites as $site) {
                    echo <<<HTML
@@ -29,41 +27,17 @@
         <table>
             <thead>
                 <tr>
-                <th></th>
-                <th>Email</th>
-                <th>количество созданных счетов</th>
-                <th>сумма созданных счетов</th>
-                <th>количество выставленных счетов</th>
-                <th>сумма выставленных счетов</th>
-                <th>количество оплаченных счетов</th>
-                <th>сума оплаченных счетов</th>
+                    <th></th>
+                    <th>Email</th>
+                    <th>количество созданных счетов</th>
+                    <th>сумма созданных счетов</th>
+                    <th>количество выставленных счетов</th>
+                    <th>сумма выставленных счетов</th>
+                    <th>количество оплаченных счетов</th>
+                    <th>сума оплаченных счетов</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php
-                    foreach ($clients as $client) {
-                        $client_mail = $client['client_mail'];
-                        $countCreatedBill = $client['countCreatedBill'];
-                        $createdBill = $client['createdBill'];
-                        $outputBill = $client['outputBill'];
-                        $CountOutputBill = $client['countOutputBill'];
-                        $closeBill = $client['closeBill'];
-                        $countCloseBill = $client['countCloseBill'];
-
-                        echo <<<HTML
-                            <tr>
-                                <td class="btn_open_modal" data-email="$client_mail" data-site="$paramSite">&#11162</td>
-                                <td>$client_mail</td>
-                                <td>$countCreatedBill</td>
-                                <td>$createdBill</td>
-                                <td>$CountOutputBill</td>
-                                <td>$outputBill</td>
-                                <td>$countCloseBill</td>
-                                <td>$closeBill</td>
-                            </tr>
-                        HTML;
-                    }
-                ?>
+            <tbody class="email_tbody">
             </tbody>
         </table>
     </div>
