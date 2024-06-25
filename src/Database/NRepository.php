@@ -2,10 +2,11 @@
 
 namespace S\P\Database;
 
-class NRepository {
+abstract class NRepository {
+
+    private \PDO $pdo;
 
     public function __construct(
-        private \PDO $pdo,
         private string $table
     )
     {
@@ -78,12 +79,6 @@ class NRepository {
 
     protected function where( string $where, $columns = '*'): array
     {
-        if(strlen($where) < 1) {
-            
-            throw new \Exception();
-
-            return [];
-        }
 
         $table = $this->table;
 
@@ -116,12 +111,6 @@ class NRepository {
 
     protected function lazyWhere(string $where, $columns = '*', int $page = 1, int $limit = 50): array
     {
-        if(strlen($where) < 1) {
-            
-            throw new \Exception();
-
-            return [];
-        }
 
         $table = $this->table;
 
@@ -144,21 +133,27 @@ class NRepository {
         $stmt->bindParam(':limit', $limit, \PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
 
-        $stmt->execute();
+        try {
 
-        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $stmt->execute();
 
-        if(!$data) {
+            $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-            throw new \PDOException();
+        } catch (\PDOException $e) {
+
+            file_put_contents(__DIR__ . '/db_error_logs.txt',$e->getMessage() . "\n", FILE_APPEND);
+            
+            return [];
 
         }
 
         return $data;
     }
 
-    public static function lazyAllUniqClients(\PDO $pdo, string $table, $columns = '*', int $limit = 30, int $page = 1): array
+    public function lazyAllUniqClients($columns = '*', int $limit = 30, int $page = 1): array
     {
+        $table = $this->table;
+
         if(is_array($columns) && count($columns) > 0) {
             $separator = ' ,';
             if(count($columns) == 1) {
@@ -173,7 +168,7 @@ class NRepository {
 
         $offset = ($page - 1) * $limit;
 
-        $stmt = $pdo->prepare($query);
+        $stmt = $this->pdo->prepare($query);
 
         $stmt->bindParam(':limit', $limit, \PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
@@ -185,8 +180,11 @@ class NRepository {
         return $data;
     }
 
-    public static function allUniqClients(\PDO $pdo, string $table, $columns = '*'): array
+    public function allUniqClients($columns = '*'): array
     {
+
+        $table = $this->table;
+
         if(is_array($columns) && count($columns) > 0) {
             $separator = ' ,';
             if(count($columns) == 1) {
@@ -199,7 +197,7 @@ class NRepository {
             SELECT DISTINCT $columns FROM $table;
         SQL;
 
-        $stmt = $pdo->prepare($query);
+        $stmt = $this->pdo->prepare($query);
 
         $stmt->execute();
 
@@ -207,4 +205,8 @@ class NRepository {
 
         return $data;
     }
+
+    abstract public function lazyTotalCost($id, int $invoice_status, int $page): array;
+
+    abstract public function totalCost($id, int $invoice_status): array;
 }

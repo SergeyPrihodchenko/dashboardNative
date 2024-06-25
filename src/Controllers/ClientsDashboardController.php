@@ -2,12 +2,17 @@
 
 namespace S\P\Controllers;
 
+use S\P\Database\Connect;
 use S\P\Database\HylokRepository;
+use S\P\Database\NSiteClientRepository;
 use S\P\Database\SwageloRepository;
 use S\P\Database\WikaRepository;
 use S\P\Exceptions\RequestException;
 use S\P\Http\Request;
 use S\P\Models\Client;
+use S\P\Models\Hylok;
+use S\P\Models\Swagelo;
+use S\P\Models\Wika;
 
 class ClientsDashboardController {
 
@@ -41,34 +46,34 @@ class ClientsDashboardController {
 
         switch ($site) {
             case 'hylok':
-               $repo = new HylokRepository();
+               $client = new Hylok();
                $ParamSite = 'hylok';
                 break;
             case 'swagelo':
-                $repo = new SwageloRepository();
+                $client = new Swagelo();
                 $ParamSite = 'swagelo';
                 break;
             case 'wika':
-                $repo = new WikaRepository();
+                $client = new Wika();
                 $ParamSite = 'wika';
                 break;
             
             default:
-                $repo = new HylokRepository();
+                $client = new Hylok();
                 $ParamSite = 'hylok';
                 break;
         }
 
-        $allClients = Client::getAllClients($repo, $limit = 50, $page = 1);
-        foreach ($allClients as $key => $client) {
+        $allClients = $client->allUniqClients();
+        foreach ($allClients as $key => $dataClient) {
             
-            $client = new Client($client['client_mail'], $repo);
-            $allClients[$key]['createdBill'] = $client->totalPrice(0)['bill'];
-            $allClients[$key]['outputBill'] = $client->totalPrice(1)['bill'];
-            $allClients[$key]['closeBill'] = $client->totalPrice(2)['bill'];
-            $allClients[$key]['countCreatedBill'] = $client->totalPrice(0)['countBills'];
-            $allClients[$key]['countOutputBill'] = $client->totalPrice(1)['countBills'];
-            $allClients[$key]['countCloseBill'] = $client->totalPrice(2)['countBills'];
+            $client->setId($dataClient['client_mail']);
+            $allClients[$key]['createdBill'] = $client->totalCostByStatus(0, 1)['bill'];
+            $allClients[$key]['outputBill'] = $client->totalCostByStatus(1, 1)['bill'];
+            $allClients[$key]['closeBill'] = $client->totalCostByStatus(2, 1)['bill'];
+            $allClients[$key]['countCreatedBill'] = $client->totalCostByStatus(0, 1)['countBills'];
+            $allClients[$key]['countOutputBill'] = $client->totalCostByStatus(1, 1)['countBills'];
+            $allClients[$key]['countCloseBill'] = $client->totalCostByStatus(2, 1)['countBills'];
         }
 
         $data['clients'] = $allClients;

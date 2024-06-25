@@ -2,7 +2,7 @@
 
 namespace S\P\Database;
 
-class NPhoneRepository extends NRepository {
+class NPhoneClientRepository extends NRepository {
 
     public function getDataById($id): array
     {

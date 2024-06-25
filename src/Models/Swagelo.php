@@ -1,9 +1,10 @@
 <?php
 
-namespace S\P\Modeles;
+namespace S\P\Models;
 
-class Swagelo {
+class Swagelo extends Model {
 
     protected string $table = 'fluidacy_swagelo_InvoiceList'; 
+    protected string $type = 'site';
 
 }

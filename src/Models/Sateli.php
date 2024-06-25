@@ -1,9 +1,10 @@
 <?php
 
-namespace S\P\Modeles;
+namespace S\P\Models;
 
-class Sateli {
+class Sateli extends Model {
 
     protected string $table = 'fluidline_sateli_InvoiceCallList'; 
+    protected string $type = 'phone';
 
 }
