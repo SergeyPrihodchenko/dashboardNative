@@ -33,9 +33,9 @@ abstract class Model {
         return $data;
     }
 
-    public function allUniqClients(): array
+    public function allUniqClients($columns = []): array
     {
-        $data = $this->repo->allUniqClients();
+        $data = $this->repo->allUniqClients($columns);
 
         return $data;
     }

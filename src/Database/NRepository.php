@@ -154,12 +154,21 @@ abstract class NRepository {
     {
         $table = $this->table;
 
-        if(is_array($columns) && count($columns) > 0) {
-            $separator = ' ,';
+        if(is_array($columns) && !empty($columns)) {
+
             if(count($columns) == 1) {
                 $separator = ' ';
             }
+
+            $separator = ' ,';
+           
             $columns = implode($separator, $columns);
+        }
+
+        if(empty($columns)) {
+
+            $columns = '*';
+            
         }
 
         $query = <<<SQL
@@ -185,12 +194,21 @@ abstract class NRepository {
 
         $table = $this->table;
 
-        if(is_array($columns) && count($columns) > 0) {
-            $separator = ' ,';
+        if(is_array($columns) && !empty($columns)) {
+
             if(count($columns) == 1) {
                 $separator = ' ';
             }
+
+            $separator = ' ,';
+           
             $columns = implode($separator, $columns);
+        }
+
+        if(empty($columns)) {
+
+            $columns = '*';
+
         }
 
         $query = <<<SQL

@@ -64,7 +64,7 @@ class ClientsDashboardController {
                 break;
         }
 
-        $allClients = $client->allUniqClients();
+        $allClients = $client->allUniqClients(['client_mail']);
         foreach ($allClients as $key => $dataClient) {
             
             $client->setId($dataClient['client_mail']);
