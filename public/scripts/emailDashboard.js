@@ -1,12 +1,21 @@
+import { mainEmailRender, tableBuilder, scrolling, uploader } from './modules/emailDashboardM.js'
+
 document.addEventListener('DOMContentLoaded', (e) => {
     const siteOption = document.querySelector('.sites_option');
     const typeOption = document.querySelector('.type_option');
     const clientsTable = document.querySelector('.email_tbody');
     const modal = document.getElementById("myModal");
     const span = document.getElementsByClassName("close")[0];
-    const modalTable = modal.querySelector('.block_table');
+    const modalTable = modal.querySelector('.m_block_table');
+    const pageTable = document.querySelector('.block_table');
 
-    mainEmailRender(clientsTable)
+    let mainPage = 1;
+    let modalPage = 1;
+
+    let siteAttr = ''
+    let mailAttr = ''
+
+    mainEmailRender(clientsTable, {page: mainPage})
 
     siteOption.addEventListener('change', (e) => {
 
@@ -20,14 +29,11 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
 
     modalTable.addEventListener('scroll', (e) => {
-        console.log(e.target.scrollTop);
+        const scrollTop = e.target.scrollTop
         const scrollHeight = e.target.scrollHeight;
-        // Получаем видимую высоту элемента
-        const clientHeight = e.target.clientHeight;
-        console.log(scrollHeight);
-        console.log(clientHeight);
+        scrolling(scrollTop, scrollHeight, modalPage, mailAttr, siteAttr, modal)
+        modalPage++
     })
-
 
     typeOption.addEventListener('change', (e) => {
         window.location.href = '/'+e.target.value
@@ -35,96 +41,26 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
     span.onclick = function() {
         modal.style.display = "none";
+        modalPage = 1
     }
 
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
+            modalPage = 1
         }
     }
 
     clientsTable.addEventListener('click', (e) => {
 
         if(e.target.classList.contains('btn_open_modal')) {
-            const data = new FormData();
-            data.append('mail', e.target.dataset.clientMail)
-            data.append('site', e.target.dataset.site)
-            fetch('/emailClientCard', {
-                method: 'POST',
-                body: data
-            })
-            .then(async res => {
-                modal.style.display = "block"
-                const data = await res.json()
-                const title = document.querySelector('.m_site_title')
-                const clientMail = document.querySelector('.m_client_mail')
-
-                title.textContent = data.site
-                clientMail.textContent = data.clientMail
-
-                const table = modal.querySelector("tbody")
-                table.innerHTML = ''
-
-                data.clientData.map((el) => {
-                    const tr = document.createElement('tr')
-              
-                    for (const key in el) {
-                        const td = document.createElement('td')
-                        td.textContent = el[key]
-                        tr.appendChild(td)
-                    }
-
-                    table.appendChild(tr)
-                });
-            })
-            .catch(err => {
-                console.log(err);
-            })
+            mailAttr = e.target.dataset.clientMail
+            siteAttr = e.target.dataset.site            
+            uploader(mailAttr, siteAttr, modalPage, modal)
+            modalPage++
         }
             
     });
 
 })
 
-const mainEmailRender = (domElem, titleSite) => {
-
-    fetch('/emailDashboardData', {
-        method: 'POST',
-
-        body: titleSite
-    })
-    .then(async res => {
-        domElem.innerHTML = '';
-
-        const data = await res.json();
-
-        data.clients.map((el) => {
-        const tdLink = document.createElement('td');
-        const tr = document.createElement('tr');
-
-        tdLink.dataset.site = data.site
-        tdLink.dataset.clientMail = el.client_mail
-        tdLink.classList.add('btn_open_modal')
-        tdLink.innerHTML = '&#11162'
-        tr.appendChild(tdLink)
-    
-        for (const key in el) {
-            const td = document.createElement('td');
-            td.textContent = el[key]
-            tr.appendChild(td)
-        }
-        domElem.appendChild(tr)
-        });
-
-    })
-    .catch(err => {
-        console.log(err);
-    })
-}
-
-function scrollUploader(domElem) {
-
-    domElem.addEventListener('scroll', e => {
-        console.log(e.target);
-    })
-}

@@ -3,9 +3,23 @@ window.addEventListener('DOMContentLoaded', () => {
   const typeOption = document.querySelector('.type_option');
   const modal = document.getElementById("myModal");
   const span = document.getElementsByClassName("close")[0];
+  const mainTable = document.querySelector('.block_table');
 
+  let mainPage = 1
 
-  maiPhoneRender(phoneTbody)
+  maiPhoneRender(phoneTbody, mainPage)
+  mainPage++
+
+  mainTable.addEventListener('scroll', (e) => {
+
+    const scrollTop = e.target.scrollTop
+    const scrollHeight = e.target.scrollHeight;
+
+    if(scrollTop > (scrollHeight / 2.5)) {
+      maiPhoneRender(phoneTbody, mainPage, false)
+      mainPage++
+    }
+  })
 
   phoneTbody.addEventListener('click', (e) => {
 
@@ -54,25 +68,31 @@ window.addEventListener('DOMContentLoaded', () => {
 
   span.onclick = function() {
     modal.style.display = "none";
+    mainPage = 1
   }
 
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
+      mainPage = 1
     }
   }
 
 })
 
 
-const maiPhoneRender = (domElem, contentClear = true) => {
+const maiPhoneRender = (domElem, page, clear = true) => {
+
+  const data = new FormData
+  data.append('page', page)
 
   fetch('/phoneDashboardData', {
       method: 'POST',
+      body: data
   })
   .then(async res => {
       
-      if(contentClear) {
+      if(clear) {
         domElem.innerHTML = ''
       }
 

@@ -9,7 +9,7 @@
             <h2 class="m_client_mail"></h2>
         </div>
     </div>
-    <div class="block_table">
+    <div class="m_block_table">
         <table class="m_table">
             <thead>
                 <tr>

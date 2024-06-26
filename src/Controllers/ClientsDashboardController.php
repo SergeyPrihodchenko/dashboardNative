@@ -65,16 +65,16 @@ class ClientsDashboardController {
                 break;
         }
 
-        $allClients = $client->lazyAllUniqClients(['client_mail'], $page);
+        $allClients = $client->lazyAllUniqClients(['client_mail'], (int)$page);
         foreach ($allClients as $key => $dataClient) {
             
             $client->setId($dataClient['client_mail']);
-            $allClients[$key]['createdBill'] = $client->totalCostByStatus(0, $page)['bill'];
-            $allClients[$key]['outputBill'] = $client->totalCostByStatus(1, $page)['bill'];
-            $allClients[$key]['closeBill'] = $client->totalCostByStatus(2, $page)['bill'];
-            $allClients[$key]['countCreatedBill'] = $client->totalCostByStatus(0, $page)['countBills'];
-            $allClients[$key]['countOutputBill'] = $client->totalCostByStatus(1, $page)['countBills'];
-            $allClients[$key]['countCloseBill'] = $client->totalCostByStatus(2, $page)['countBills'];
+            $allClients[$key]['createdBill'] = $client->totalCostByStatus(0, (int)$page)['bill'];
+            $allClients[$key]['outputBill'] = $client->totalCostByStatus(1, (int)$page)['bill'];
+            $allClients[$key]['closeBill'] = $client->totalCostByStatus(2, (int)$page)['bill'];
+            $allClients[$key]['countCreatedBill'] = $client->totalCostByStatus(0, (int)$page)['countBills'];
+            $allClients[$key]['countOutputBill'] = $client->totalCostByStatus(1, (int)$page)['countBills'];
+            $allClients[$key]['countCloseBill'] = $client->totalCostByStatus(2, (int)$page)['countBills'];
         }
 
         $data['clients'] = $allClients;

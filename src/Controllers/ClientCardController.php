@@ -17,6 +17,7 @@ class ClientCardController {
 
             $clientMail = $request->getPostData('mail');
             $site = $request->getPostData('site');
+            $page = $request->getPostData('page');
 
         } catch (RequestException $e) {
             
@@ -38,7 +39,7 @@ class ClientCardController {
 
         $client->setId($clientMail);
 
-        $clientData =  $client->find([
+        $clientData =  $client->lazyFind([
             'client_id',
             'fluid_tag',
             'client_mail_id',
@@ -48,7 +49,7 @@ class ClientCardController {
             'invoice_number',
             'invoice_date',
             'invoice_price'
-         ]);
+         ], $page);
 
         $data['clientMail'] = $clientMail;
         $data['site'] = $site;
