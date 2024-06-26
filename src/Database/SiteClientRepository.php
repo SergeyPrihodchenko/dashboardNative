@@ -2,7 +2,7 @@
 
 namespace S\P\Database;
 
-class NSiteClientRepository extends NRepository {
+class SiteClientRepository extends Repository {
 
     public function clientDataById($id, $columns): array
     {

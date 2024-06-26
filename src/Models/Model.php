@@ -2,26 +2,26 @@
 
 namespace S\P\Models;
 
-use S\P\Database\NPhoneClientRepository;
-use S\P\Database\NRepository;
-use S\P\Database\NSiteClientRepository;
+use S\P\Database\PhoneClientRepository;
+use S\P\Database\Repository;
+use S\P\Database\SiteClientRepository;
 
 abstract class Model {
 
     protected string $table;
     protected ?string $id = null;
     protected string $type = 'model';
-    protected ?NRepository $repo = null;
+    protected ?Repository $repo = null;
 
     public function __construct()
     {
         switch ($this->type) {
             case 'site':
-                $this->repo = new NSiteClientRepository($this->table);
+                $this->repo = new SiteClientRepository($this->table);
                 break;
             
             case 'phone':
-                $this->repo =new NPhoneClientRepository($this->table);
+                $this->repo =new PhoneClientRepository($this->table);
                 break;
         }
     }
