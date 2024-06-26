@@ -2,12 +2,8 @@
 
 namespace S\P\Controllers;
 
-use S\P\Database\HylokRepository;
-use S\P\Database\SwageloRepository;
-use S\P\Database\WikaRepository;
 use S\P\Exceptions\RequestException;
 use S\P\Http\Request;
-use S\P\Models\Client;
 use S\P\Models\Hylok;
 use S\P\Models\Swagelo;
 use S\P\Models\Wika;

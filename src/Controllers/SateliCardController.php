@@ -2,9 +2,7 @@
 
 namespace S\P\Controllers;
 
-use S\P\Database\SateliRepository;
 use S\P\Http\Request;
-use S\P\Models\ClientSateli;
 use S\P\Models\Sateli;
 
 class SateliCardController {
