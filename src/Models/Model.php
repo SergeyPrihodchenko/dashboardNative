@@ -58,7 +58,7 @@ abstract class Model {
     public function totalCostByStatus(int $invoceStatus, int $page, bool $lazy = true): array
     {
 
-        if(!$this->id) {
+        if($this->id == null) {
 
             throw new \Exception();
 

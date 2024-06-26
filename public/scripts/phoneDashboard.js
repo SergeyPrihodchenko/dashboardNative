@@ -7,16 +7,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
   let mainPage = 1
 
-  maiPhoneRender(phoneTbody, mainPage)
+  mainPhoneRender(phoneTbody, mainPage)
   mainPage++
 
   mainTable.addEventListener('scroll', (e) => {
 
-    const scrollTop = e.target.scrollTop
+    const scrollTop = e.target.scrollTop;
+    const clientHeight = e.target.clientHeight;
     const scrollHeight = e.target.scrollHeight;
-
-    if(scrollTop > (scrollHeight / 2.5)) {
-      maiPhoneRender(phoneTbody, mainPage, false)
+    if(scrollTop + clientHeight >= scrollHeight) {
+      console.log(mainPage);
+      mainPhoneRender(phoneTbody, mainPage, false)
       mainPage++
     }
   })
@@ -81,7 +82,7 @@ window.addEventListener('DOMContentLoaded', () => {
 })
 
 
-const maiPhoneRender = (domElem, page, clear = true) => {
+const mainPhoneRender = (domElem, page, clear = true) => {
 
   const data = new FormData
   data.append('page', page)

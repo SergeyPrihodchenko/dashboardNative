@@ -28,21 +28,6 @@
                 </tr>
             </thead>
             <tbody class="phone_tbody">
-
-
-
-                            <tr>
-                                <td><a href="/phoneClientCard?phone=$client_phone">&#11162</a></td>
-                                <td>$client_phone</td>
-                                <td>$countCreatedBill</td>
-                                <td>$createdBill</td>
-                                <td>$CountOutputBill</td>
-                                <td>$outputBill</td>
-                                <td>$countCloseBill</td>
-                                <td>$closeBill</td>
-                            </tr>
-
-
             </tbody>
         </table>
     </div>

@@ -109,7 +109,7 @@ abstract class Repository {
         return $data;
     }
 
-    protected function lazyWhere(string $where, $columns, int $page, int $limit = 50): array
+    protected function lazyWhere(string $where, $columns, int $page, int $limit = 30): array
     {
 
         $table = $this->table;
@@ -150,7 +150,7 @@ abstract class Repository {
         return $data;
     }
 
-    public function lazyAllUniqClients($columns = '*', int $page, int $limit = 30): array
+    public function lazyAllUniqClients($columns = '*', int $page, int $limit = 50): array
     {
         $table = $this->table;
 
