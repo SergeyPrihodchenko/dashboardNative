@@ -5,6 +5,7 @@ namespace S\P\Controllers;
 use S\P\Database\SateliRepository;
 use S\P\Http\Request;
 use S\P\Models\ClientSateli;
+use S\P\Models\Sateli;
 
 class SateliDashboardController {
 
@@ -15,17 +16,17 @@ class SateliDashboardController {
 
     public static function phoneDashboardData(Request $request): array
     {
-        $limit = 30;
         $page = 1;
-        $allClients = ClientSateli::getAllClients(new SateliRepository, $limit, $page);
-        foreach ($allClients as $key => $client) {
-            $client = new ClientSateli($client['client_phone'], new SateliRepository);
-            $allClients[$key]['createdBill'] = $client->totalPrice(0)['bill'];
-            $allClients[$key]['outputBill'] = $client->totalPrice(1)['bill'];
-            $allClients[$key]['closeBill'] = $client->totalPrice(2)['bill'];
-            $allClients[$key]['countCreatedBill'] = $client->totalPrice(0)['countBills'];
-            $allClients[$key]['countOutputBill'] = $client->totalPrice(1)['countBills'];
-            $allClients[$key]['countCloseBill'] = $client->totalPrice(2)['countBills'];
+        $client = new Sateli();
+        $allClients = $client->lazyAllUniqClients(['client_phone'], $page);
+        foreach ($allClients as $key => $clientData) {
+            $client->setId($clientData['client_phone']);
+            $allClients[$key]['createdBill'] = $client->totalCostByStatus(0, $page)['bill'];
+            $allClients[$key]['outputBill'] = $client->totalCostByStatus(1, $page)['bill'];
+            $allClients[$key]['closeBill'] = $client->totalCostByStatus(2, $page)['bill'];
+            $allClients[$key]['countCreatedBill'] = $client->totalCostByStatus(0, $page)['countBills'];
+            $allClients[$key]['countOutputBill'] = $client->totalCostByStatus(1, $page)['countBills'];
+            $allClients[$key]['countCloseBill'] = $client->totalCostByStatus(2, $page)['countBills'];
         }
 
         $data['clients'] = $allClients;

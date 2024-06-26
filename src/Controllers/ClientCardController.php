@@ -5,77 +5,44 @@ namespace S\P\Controllers;
 use S\P\Database\HylokRepository;
 use S\P\Database\SwageloRepository;
 use S\P\Database\WikaRepository;
+use S\P\Exceptions\RequestException;
 use S\P\Http\Request;
 use S\P\Models\Client;
+use S\P\Models\Hylok;
+use S\P\Models\Swagelo;
+use S\P\Models\Wika;
 
 class ClientCardController {
 
-    public static function index(Request $request):array
-    {
-
-        $sites = [
-            'hylok',
-            'swagelo',
-            'wika'
-        ];
-
-        $clientMail = $request->getParam('email');
-        $site = $request->getParam('site');
-        
-        switch ($site) {
-            case 'swagelo':
-                $repo = new SwageloRepository;
-                break;
-            case 'hylok':
-                $repo = new HylokRepository;
-                break;
-            case 'wika':
-                $repo = new WikaRepository;
-                break;
-        }
-
-        $client = new Client($clientMail, $repo);
-
-        $clientData =  $client->getClientData([
-            'client_id',
-            'fluid_tag',
-            'client_mail_id',
-            'client_code',
-            'invoice_id',
-            'invoice_status',
-            'invoice_number',
-            'invoice_date',
-            'invoice_price'
-         ]);
-
-        $data['clientMail'] = $clientMail;
-        $data['site'] = $site;
-        $data['sites'] = $sites;
-        $data['clientData'] = $clientData;
-
-        return $data;
-    }
     public static function dataByClient(Request $request):array
     {
 
-        $clientMail = $request->getPostData('email');
-        $site = $request->getPostData('site');
+        try {
+
+            $clientMail = $request->getPostData('mail');
+            $site = $request->getPostData('site');
+
+        } catch (RequestException $e) {
+            
+            // redirect
+
+        }
         
         switch ($site) {
             case 'swagelo':
-                $repo = new SwageloRepository;
+                $client = new Swagelo;
                 break;
             case 'hylok':
-                $repo = new HylokRepository;
+                $client = new Hylok;
                 break;
             case 'wika':
-                $repo = new WikaRepository;
+                $client = new Wika;
                 break;
         }
 
-        $client = new Client($clientMail, $repo);
+        $client->setId($clientMail);
 
-        $clientData =  $client->getClientData([
+        $clientData =  $client->find([
             'client_id',
             'fluid_tag',
             'client_mail_id',

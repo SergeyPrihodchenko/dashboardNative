@@ -109,7 +109,7 @@ abstract class NRepository {
         return $data;
     }
 
-    protected function lazyWhere(string $where, $columns = '*', int $page = 1, int $limit = 50): array
+    protected function lazyWhere(string $where, $columns, int $page, int $limit = 50): array
     {
 
         $table = $this->table;
@@ -150,7 +150,7 @@ abstract class NRepository {
         return $data;
     }
 
-    public function lazyAllUniqClients($columns = '*', int $limit = 30, int $page = 1): array
+    public function lazyAllUniqClients($columns = '*', int $page, int $limit = 30): array
     {
         $table = $this->table;
 
@@ -223,6 +223,10 @@ abstract class NRepository {
 
         return $data;
     }
+
+    abstract public function clientDataById($id, $columns): array;
+
+    abstract public function lazyClientDataById($id, $columns, int $page): array;
 
     abstract public function lazyTotalCost($id, int $invoice_status, int $page): array;
 

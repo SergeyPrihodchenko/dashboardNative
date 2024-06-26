@@ -26,9 +26,23 @@ abstract class Model {
         }
     }
 
-    public function lazyAllUniqClients(): array
+    public function lazyFind($columns, $page): array
     {
-        $data = $this->repo->lazyAllUniqClients();
+        $data = $this->repo->lazyClientDataById($this->id, $columns, $page);
+
+        return $data;
+    }
+
+    public function find($columns): array
+    {
+        $data = $this->repo->clientDataById($this->id, $columns);
+
+        return $data;
+    }
+
+    public function lazyAllUniqClients($columns, $page = 1): array
+    {
+        $data = $this->repo->lazyAllUniqClients($columns, $page);
 
         return $data;
     }
@@ -66,7 +80,7 @@ abstract class Model {
 
         }
 
-        return ['countBills' => $countBills, 'bill' => ($sumPay / 100)];
+        return ['countBills' => $countBills, 'bill' => number_format(($sumPay / 100), 2, '.', '')];
     }
 
     public function setId(string $value): void

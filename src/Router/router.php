@@ -56,34 +56,6 @@ switch ($method) {
                     'content' => $stencli->render('contents/dashboardSateli', $data)
                 ]);
                 break;
-                
-            case '/emailClientCard':
-        
-                $data = ClientCardController::index(new Request());
-                $style = 'styles/style.css';
-                $script = 'scripts/phoneDashboard.js';
-        
-                echo $stencli->render('templates/template', [
-                    'title' => 'clientCard',
-                    'style' => $style,
-                    'script' => $script,
-                    'content' => $stencli->render('contents/emailCardDashboard', $data)
-                ]);
-                break;
-
-            case '/phoneClientCard':
-        
-                $data = SateliCardController::index(new Request());
-                $style = 'styles/style.css';
-                $script = 'scripts/phoneDashboard.js';
-        
-                echo $stencli->render('templates/template', [
-                    'title' => 'clientCard',
-                    'style' => $style,
-                    'script' => $script,
-                    'content' => $stencli->render('contents/phoneCardDashboard', $data)
-                ]);
-                break;
             
             default:
                 echo $stencli->render('templates/template', [

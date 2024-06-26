@@ -21,6 +21,7 @@ class Request {
     public function getParam($key): mixed
     {
         if(!array_key_exists($key, $this->params)) {
+            
             throw new RequestException('not found parameter');
 
             return null;

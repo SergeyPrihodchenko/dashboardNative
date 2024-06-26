@@ -47,9 +47,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
         if(e.target.classList.contains('btn_open_modal')) {
             const data = new FormData();
-            data.append('email', e.target.dataset.clientMail)
+            data.append('mail', e.target.dataset.clientMail)
             data.append('site', e.target.dataset.site)
-
             fetch('/emailClientCard', {
                 method: 'POST',
                 body: data

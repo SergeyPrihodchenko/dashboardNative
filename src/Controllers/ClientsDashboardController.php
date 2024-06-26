@@ -16,7 +16,7 @@ use S\P\Models\Wika;
 
 class ClientsDashboardController {
 
-    public static function index(Request $request): array
+    public static function index(): array
     {
         $data = [];
 
@@ -35,13 +35,20 @@ class ClientsDashboardController {
     {
         $data = [];
 
+
         try {
+
             $site = $request->getPostData('titleSite');
-            $limit = 30;
             $page = $request->getPostData('page');
 
         } catch (RequestException $e) {
+
+            if(!isset($page)) {
+                $page = 1;
+            }
+
             $site = 'default';
+
         }
 
         switch ($site) {
@@ -64,16 +71,16 @@ class ClientsDashboardController {
                 break;
         }
 
-        $allClients = $client->allUniqClients(['client_mail']);
+        $allClients = $client->lazyAllUniqClients(['client_mail'], $page);
         foreach ($allClients as $key => $dataClient) {
             
             $client->setId($dataClient['client_mail']);
-            $allClients[$key]['createdBill'] = $client->totalCostByStatus(0, 1)['bill'];
-            $allClients[$key]['outputBill'] = $client->totalCostByStatus(1, 1)['bill'];
-            $allClients[$key]['closeBill'] = $client->totalCostByStatus(2, 1)['bill'];
-            $allClients[$key]['countCreatedBill'] = $client->totalCostByStatus(0, 1)['countBills'];
-            $allClients[$key]['countOutputBill'] = $client->totalCostByStatus(1, 1)['countBills'];
-            $allClients[$key]['countCloseBill'] = $client->totalCostByStatus(2, 1)['countBills'];
+            $allClients[$key]['createdBill'] = $client->totalCostByStatus(0, $page)['bill'];
+            $allClients[$key]['outputBill'] = $client->totalCostByStatus(1, $page)['bill'];
+            $allClients[$key]['closeBill'] = $client->totalCostByStatus(2, $page)['bill'];
+            $allClients[$key]['countCreatedBill'] = $client->totalCostByStatus(0, $page)['countBills'];
+            $allClients[$key]['countOutputBill'] = $client->totalCostByStatus(1, $page)['countBills'];
+            $allClients[$key]['countCloseBill'] = $client->totalCostByStatus(2, $page)['countBills'];
         }
 
         $data['clients'] = $allClients;

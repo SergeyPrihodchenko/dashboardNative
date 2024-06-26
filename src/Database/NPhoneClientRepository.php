@@ -4,35 +4,16 @@ namespace S\P\Database;
 
 class NPhoneClientRepository extends NRepository {
 
-    public function getDataById($id): array
+    public function clientDataById($id, $columns): array
     {
-
-        $data = $this->where("client_phone = $id");
-
-        if(!$data) {
-            
-            throw new \Exception();
-
-            return [];
-
-        }
+        $data = $data = $this->where("client_phone = '{$id}'", $columns);
 
         return $data;
 
     }
-
-    public function lazyGetDataById($id, int $page): array
+    public function lazyClientDataById($id, $columns, $page): array
     {
-
-        $data = $this->lazyWhere("client_phone = $id", $page);
-
-        if(!$data) {
-            
-            throw new \Exception();
-
-            return [];
-
-        }
+        $data = $data = $this->lazyWhere("client_phone = '{$id}'", $columns, $page);
 
         return $data;
 
