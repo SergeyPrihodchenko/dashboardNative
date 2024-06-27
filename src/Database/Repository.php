@@ -100,11 +100,11 @@ abstract class Repository {
 
         $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        if(!$data) {
+        // if(!$data) {
 
-            throw new \PDOException();
+        //     throw new \PDOException();
 
-        }
+        // }
 
         return $data;
     }

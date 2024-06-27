@@ -53,8 +53,8 @@ export const tableBuilder = (domEl, data) => {
 
 }
 
-export const scrolling = (scrollTop, scrollHeight, page, mailAttr, siteAttr, modal) => {
-    if(scrollTop > (scrollHeight / 2.5)) {
+export const scrolling = (scrollTop, scrollHeight, clientHeight, page, mailAttr, siteAttr, modal) => {
+    if(scrollTop + clientHeight >= scrollHeight) {
         uploader(mailAttr, siteAttr, page, modal)
     }
 }

@@ -31,7 +31,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
     modalTable.addEventListener('scroll', (e) => {
         const scrollTop = e.target.scrollTop
         const scrollHeight = e.target.scrollHeight;
-        scrolling(scrollTop, scrollHeight, modalPage, mailAttr, siteAttr, modal)
+        const clientHeight = e.target.clientHeight;
+        scrolling(scrollTop, scrollHeight, clientHeight, modalPage, mailAttr, siteAttr, modal)
         modalPage++
     })
 

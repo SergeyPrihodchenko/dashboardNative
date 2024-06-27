@@ -55,7 +55,7 @@ abstract class Model {
     }
 
 
-    public function totalCostByStatus(int $invoceStatus, int $page, bool $lazy = true): array
+    public function totalCostByStatus(int $invoceStatus): array
     {
 
         if($this->id == null) {
@@ -64,11 +64,10 @@ abstract class Model {
 
         }
 
-        if(!$lazy) {
-            $prices = $this->repo->totalCost($this->id, $invoceStatus);
-        }
 
-        $prices = $this->repo->lazyTotalCost($this->id, $invoceStatus, $page);
+        $prices = $this->repo->totalCost($this->id, $invoceStatus);
+        
+
   
         $sumPay = 0;
         $countBills = 0;

@@ -20,12 +20,12 @@ class SateliDashboardController {
         $clients = $client->lazyAllUniqClients(['client_phone'], (int)$page);
         foreach ($clients as $key => $clientData) {
             $client->setId($clientData['client_phone']);
-            $clients[$key]['createdBill'] = $client->totalCostByStatus(0, (int)$page)['bill'];
-            $clients[$key]['outputBill'] = $client->totalCostByStatus(1, (int)$page)['bill'];
-            $clients[$key]['closeBill'] = $client->totalCostByStatus(2, (int)$page)['bill'];
-            $clients[$key]['countCreatedBill'] = $client->totalCostByStatus(0, (int)$page)['countBills'];
-            $clients[$key]['countOutputBill'] = $client->totalCostByStatus(1, (int)$page)['countBills'];
-            $clients[$key]['countCloseBill'] = $client->totalCostByStatus(2, (int)$page)['countBills'];
+            $clients[$key]['createdBill'] = $client->totalCostByStatus(0)['bill'];
+            $clients[$key]['outputBill'] = $client->totalCostByStatus(1)['bill'];
+            $clients[$key]['closeBill'] = $client->totalCostByStatus(2)['bill'];
+            $clients[$key]['countCreatedBill'] = $client->totalCostByStatus(0)['countBills'];
+            $clients[$key]['countOutputBill'] = $client->totalCostByStatus(1)['countBills'];
+            $clients[$key]['countCloseBill'] = $client->totalCostByStatus(2)['countBills'];
         }
 
         $data['clients'] = $clients;
