@@ -4,9 +4,9 @@ namespace S\P\Controllers;
 
 use S\P\Exceptions\RequestException;
 use S\P\Http\Request;
-use S\P\Models\Hylok;
-use S\P\Models\Swagelo;
-use S\P\Models\Wika;
+use S\P\Models\InvoiceMail\Hylok;
+use S\P\Models\InvoiceMail\Swagelo;
+use S\P\Models\InvoiceMail\Wika;
 
 class ClientCardController {
 

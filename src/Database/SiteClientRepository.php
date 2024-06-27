@@ -2,34 +2,14 @@
 
 namespace S\P\Database;
 
-class SiteClientRepository extends Repository {
+abstract class SiteClientRepository extends Repository {
 
-    public function clientDataById($id, $columns): array
-    {
-        $data = $data = $this->where("client_mail = '{$id}'", $columns);
+    abstract public function clientDataById($id, $columns): array;
 
-        return $data;
+    abstract public function lazyClientDataById($id, $columns, int $page): array;
 
-    }
-    public function lazyClientDataById($id, $columns, $page): array
-    {
-        $data = $data = $this->lazyWhere("client_mail = '{$id}'", $columns, $page);
+    abstract public function lazyTotalCost($id, int $invoice_status, int $page): array;
 
-        return $data;
-
-    }
-
-    public function totalCost($id, int $invoice_status): array
-    {
-        $data = $this->where("client_mail = '{$id}' AND invoice_status = '{$invoice_status}'", ['invoice_price']);
-
-        return $data;
-    }
-
-    public function lazyTotalCost($id, int $invoice_status, int $page): array
-    {
-        $data = $this->lazyWhere("client_mail = '{$id}' AND invoice_status = '{$invoice_status}'", ['invoice_price'], $page);
-
-        return $data;
-    }
+    abstract public function totalCost($id, int $invoice_status): array;
+    
 }

@@ -3,7 +3,7 @@
 namespace S\P\Controllers;
 
 use S\P\Http\Request;
-use S\P\Models\Sateli;
+use S\P\Models\InvoiceCall\Sateli;
 
 class SateliCardController {
 

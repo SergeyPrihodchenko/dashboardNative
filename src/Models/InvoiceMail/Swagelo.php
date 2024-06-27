@@ -1,8 +1,8 @@
 <?php
 
-namespace S\P\Models;
+namespace S\P\Models\InvoiceMail;
 
-class Swagelo extends Model {
+class Swagelo extends ModelMail {
 
     protected string $table = 'fluidacy_swagelo_InvoiceList'; 
     protected string $type = 'site';

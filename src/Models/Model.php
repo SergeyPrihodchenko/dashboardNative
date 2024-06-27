@@ -2,9 +2,9 @@
 
 namespace S\P\Models;
 
-use S\P\Database\PhoneClientRepository;
+use S\P\Database\InvoiceCall\CallRepository;
+use S\P\Database\InvoiceMail\MailRepository;
 use S\P\Database\Repository;
-use S\P\Database\SiteClientRepository;
 
 abstract class Model {
 
@@ -17,11 +17,11 @@ abstract class Model {
     {
         switch ($this->type) {
             case 'site':
-                $this->repo = new SiteClientRepository($this->table);
+                $this->repo = new MailRepository($this->table);
                 break;
             
             case 'phone':
-                $this->repo =new PhoneClientRepository($this->table);
+                $this->repo =new CallRepository($this->table);
                 break;
         }
     }
