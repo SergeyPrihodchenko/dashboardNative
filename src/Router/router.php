@@ -9,11 +9,11 @@ use S\P\Http\Request;
 use S\P\Templater\Stencli;
 
 Connect::setAttributs(    
-    'mysql',
-    '172.17.0.1:20002',
-    'DB',
-    'dev',
-    '123'
+    $_SERVER['DRIVER'],
+    $_SERVER['HOST'],
+    $_SERVER['DB_NAME'],
+    $_SERVER['USER_NAME'],
+    $_SERVER['PASS']
 );
 
 $route = parse_url($_SERVER['REQUEST_URI'])['path'];
