@@ -99,6 +99,27 @@ CREATE TABLE `fluidline_wika_InvoiceList` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `fluidline_wika_visitors_info`
+--
+
+DROP TABLE IF EXISTS `fluidline_wika_visitors_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `fluidline_wika_visitors_info` (
+  `vid` varchar(255) DEFAULT NULL,
+  `user_agent` varchar(255) DEFAULT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `fingerprint` varchar(255) DEFAULT NULL,
+  `_ym_uid` varchar(255) DEFAULT NULL,
+  `created_on` datetime DEFAULT NULL,
+  `visited_on` datetime DEFAULT NULL,
+  `geo` text,
+  `u_width` int DEFAULT NULL,
+  `client_id` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping routines for database 'DB'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -111,4 +132,4 @@ CREATE TABLE `fluidline_wika_InvoiceList` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-14 11:19:22
+-- Dump completed on 2024-06-27  9:42:12
