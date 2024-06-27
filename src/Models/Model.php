@@ -4,6 +4,7 @@ namespace S\P\Models;
 
 use S\P\Database\InvoiceCall\CallRepository;
 use S\P\Database\InvoiceMail\MailRepository;
+use S\P\Database\Visitors\VisitorsRepository;
 use S\P\Database\Repository;
 
 abstract class Model {
@@ -22,6 +23,9 @@ abstract class Model {
             
             case 'phone':
                 $this->repo =new CallRepository($this->table);
+                break;
+            case 'visitors':
+                $this->repo =new VisitorsRepository($this->table);
                 break;
         }
     }

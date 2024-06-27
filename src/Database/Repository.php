@@ -224,6 +224,40 @@ abstract class Repository {
         return $data;
     }
 
+    public function whereDistinct($where, $columns): array
+    {
+        $table = $this->table;
+
+        if(is_array($columns) && !empty($columns)) {
+
+            if(count($columns) == 1) {
+                $separator = ' ';
+            }
+
+            $separator = ' ,';
+           
+            $columns = implode($separator, $columns);
+        }
+
+        if(empty($columns)) {
+
+            $columns = '*';
+
+        }
+
+        $query = <<<SQL
+            SELECT DISTINCT $columns FROM $table WHERE $where;
+        SQL;
+
+        $stmt = $this->pdo->prepare($query);
+
+        $stmt->execute();
+
+        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $data;
+    }
+
     abstract public function clientDataById($id, $columns): array;
 
     abstract public function lazyClientDataById($id, $columns, int $page): array;
