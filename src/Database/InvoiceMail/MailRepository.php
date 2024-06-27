@@ -23,7 +23,7 @@ class MailRepository extends SiteClientRepository {
 
     public function totalCost($id, int $invoice_status): array
     {
-        $data = $this->where("client_mail = '{$id}' AND invoice_status = '{$invoice_status}'", ['invoice_price']);
+        $data = $this->whereDistinct("client_mail = '{$id}' AND invoice_status = '{$invoice_status}'", ['invoice_price','invoice_number']);
 
         return $data;
     }
