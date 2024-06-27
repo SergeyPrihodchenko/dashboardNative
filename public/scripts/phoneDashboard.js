@@ -104,6 +104,7 @@ const mainPhoneRender = (domElem, page, clear = true) => {
       const tr = document.createElement('tr');
 
       tdLink.dataset.clientPhone = el.client_phone
+      tdLink.dataset.clientId = el.client_id
       tdLink.classList.add('btn_open_modal')
       tdLink.innerHTML = '&#11162'
       tr.appendChild(tdLink)

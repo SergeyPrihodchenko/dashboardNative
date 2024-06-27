@@ -19,6 +19,7 @@ export const mainEmailRender = (domElem, data, clear = true) => {
 
         tdLink.dataset.site = data.site
         tdLink.dataset.clientMail = el.client_mail
+        tdLink.dataset.clientId = el.client_id
         tdLink.classList.add('btn_open_modal')
         tdLink.innerHTML = '&#11162'
         tr.appendChild(tdLink)

@@ -88,27 +88,44 @@ a {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  /* Modal Content */
+  /* The Close Button */
 }
-
-/* Modal Content */
-.modal-content {
+.modal .m_block_content {
+  display: flex;
+  flex-direction: column;
+}
+.modal .m_block_content .m_header {
+  height: 50px;
+  width: 100%;
+  border: solid 0.5px black;
+}
+.modal .m_block_content .block_display {
+  display: flex;
+  flex-direction: row;
+}
+.modal .m_block_content .panel_dashboard {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+.modal .modal-content {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
 }
-
-/* The Close Button */
-.close {
+.modal .close {
   color: #aaaaaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
-
-.close:hover,
-.close:focus {
+.modal .close:hover,
+.modal .close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
