@@ -11,8 +11,13 @@ abstract class ModelVisitors extends Model {
         parent::__construct();
     }
 
-    public function ymUid(): string
+    public function ymUid(): string|null
     {
+        if(empty($this->id)) {
+
+            return null;
+
+        }
         $data = $this->repo->ymUid($this->id, ['_ym_uid']);
 
         return $data[0]['_ym_uid'];

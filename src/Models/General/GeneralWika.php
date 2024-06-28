@@ -30,10 +30,25 @@ class GeneralWika {
         $this->visitors->setId($client_id);
         $ymId = $this->visitors->ymUid();
 
+        if(empty($ymId)) {
+
+            foreach ($data1C as $el) {
+                $data[date("Y-m-d", strtotime($el['invoice_date']))][] = ['1C' => $el];
+            }
+
+            return $data;
+
+        }
+
         $dataMetric = $this->yandex->metricById($ymId)['data'];
 
-        $data['1c'] = $data1C;
-        $data['yandex'] = $dataMetric;
+        foreach ($data1C as $el) {
+            $data[date("Y-m-d", strtotime($el['invoice_date']))][] = ['1C' => $el];
+        }
+        
+        foreach ($dataMetric as $value) {
+            $data[date("Y-m-d", strtotime($value['dimensions'][1]['name']))][] = ['yandex' => $value];
+        }
 
         return $data;
     }

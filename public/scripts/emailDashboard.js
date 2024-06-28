@@ -46,6 +46,72 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
     clientsTable.addEventListener('click', (e) => {
 
+        const data = new FormData
+        data.append('mail', e.target.dataset.clientMail)
+        data.append('site', e.target.dataset.site)
+        data.append('id', e.target.dataset.clientId)
+        console.log(e.target.dataset.clientId, e.target.dataset.site, e.target.dataset.clientMail);
+        fetch('/emailClientCard', {
+            method: 'POST',
+            body: data
+        })
+        .then(async res => {
+            const response = await res.json()
+            console.log(response);
+
+            const mail = response.clientMail
+            const site = response.site
+            const domEl = modal.querySelector('.card_events')
+            domEl.innerHTML = ''
+
+            for(let key in response.data) {
+                const cardGroup = document.createElement('div')
+                cardGroup.classList.add('card_group')
+                const cardGroupTitle = document.createElement('h4')
+                cardGroupTitle.classList.add('card_group_title')
+                cardGroupTitle.textContent = key
+                cardGroup.appendChild(cardGroupTitle)
+                response.data[key].forEach(obj => {
+                    const card = document.createElement('div')
+                    card.classList.add('card')
+                    const cardTitle = document.createElement('h4')
+                    cardTitle.classList.add('card_title')
+                    cardGroup.appendChild(card)
+                    card.appendChild(cardTitle)
+                    for(let key in obj) {
+                        if(key == '1C') {
+                            cardTitle.textContent = key
+                            const object = obj[key]
+                            for(let key in object) {
+                                const p = document.createElement('p')
+                                p.classList.add('card_title')
+                                p.textContent = object[key]
+                                card.appendChild(p)
+                            }
+                        } 
+                       
+                        if(key == 'yandex') {
+                            cardTitle.textContent = key
+                            const yandex = obj[key]
+                            for(key in yandex) {
+                                yandex[key].forEach(el => {
+                                    for(key in el) {
+                                        const p = document.createElement('p')
+                                        p.classList.add('card_title')
+                                        p.textContent = el[key]
+                                        card.appendChild(p)
+                                    }
+                                })
+                            }
+                        }
+                    }
+                });
+                domEl.appendChild(cardGroup)
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
         if(e.target.classList.contains('btn_open_modal')) {
             modal.style.display = "block"
         }

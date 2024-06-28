@@ -60,8 +60,8 @@ class ClientsDashboardController {
                 break;
             
             default:
-                $client = new Hylok();
-                $ParamSite = 'hylok';
+                $client = new Wika();
+                $ParamSite = 'wika';
                 break;
         }
 

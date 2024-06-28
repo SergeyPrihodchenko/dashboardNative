@@ -4,6 +4,7 @@ namespace S\P\Controllers;
 
 use S\P\Exceptions\RequestException;
 use S\P\Http\Request;
+use S\P\Models\General\GeneralWika;
 use S\P\Models\InvoiceMail\Hylok;
 use S\P\Models\InvoiceMail\Swagelo;
 use S\P\Models\InvoiceMail\Wika;
@@ -17,43 +18,32 @@ class ClientCardController {
 
             $clientMail = $request->getPostData('mail');
             $site = $request->getPostData('site');
-            $page = $request->getPostData('page');
-
+            $clientId = $request->getPostData('id');
+        
         } catch (RequestException $e) {
             
             // redirect
 
         }
         
-        switch ($site) {
-            case 'swagelo':
-                $client = new Swagelo;
-                break;
-            case 'hylok':
-                $client = new Hylok;
-                break;
-            case 'wika':
-                $client = new Wika;
-                break;
-        }
+        // switch ($site) {
+        //     case 'swagelo':
+        //         $client = new Swagelo;
+        //         break;
+        //     case 'hylok':
+        //         $client = new Hylok;
+        //         break;
+        //     case 'wika':
+        //         $client = new Wika;
+        //         break;
+        // }
 
-        $client->setId($clientMail);
 
-        $clientData =  $client->lazyFind([
-            'client_id',
-            'fluid_tag',
-            'client_mail_id',
-            'client_code',
-            'invoice_id',
-            'invoice_status',
-            'invoice_number',
-            'invoice_date',
-            'invoice_price'
-         ], $page);
+        $generalWika = new GeneralWika;
+        $data['data'] = $generalWika->buildData($clientMail);
 
         $data['clientMail'] = $clientMail;
         $data['site'] = $site;
-        $data['clientData'] = $clientData;
 
         return $data;
     }

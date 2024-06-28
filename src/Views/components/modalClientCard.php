@@ -13,21 +13,6 @@
                 <p>metric users [1] => 1</p>
             </div>
             <div class="card_events">
-                <div class="card">
-                    <h4>1C</h4>
-                    <p>invoice status: 1</p>
-                    <p>invoice price: 50179.20</p>
-                    <p>invoice date: 2024-05-15 14:09:03</p>
-
-                </div>
-                <div class="card">
-                    <h4>yandex</h4>
-                    <p>client id:  1715759202645375705</p>
-                    <p>date visit: 2024-05-15</p>
-                    <p>url visit: https://wika-manometry.ru/</p>
-                    <p>favicon site: wika-manometry.ru</p>
-
-                </div>
             </div>
         </div>
     </div>
