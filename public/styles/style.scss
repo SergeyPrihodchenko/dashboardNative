@@ -113,29 +113,51 @@ a {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 
-    .m_block_content {
+    .main_block {
+
         display: flex;
         flex-direction: column;
 
-        .m_header {
-            height: 50px;
-            width: 100%;
-            border: solid .5px black;
-        }
-        .block_display {
+        border: solid 1px black;
 
+        .header {
+            border: solid 1px black;
             display: flex;
-            flex-direction: row;
+            justify-content: space-around;
         }
 
-        .panel_dashboard {
+        .content_block {
 
             height: 100%;
 
             display: flex;
-            flex-direction: column;
-            justify-content: start;
-            align-items: start;
+            padding: 5px;
+
+            .card_info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: start;
+                width: 400px;
+                border-right: solid 1px black;
+            }
+
+            .card_events {
+
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+
+                max-height: 700px;
+                overflow: auto;
+
+                .card {
+                    border: solid 1px black;
+
+                    padding: 10px;
+                    margin-bottom: 10px;
+                }
+            }
         }
     }
 

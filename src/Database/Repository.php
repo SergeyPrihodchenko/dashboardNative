@@ -265,4 +265,9 @@ abstract class Repository {
     abstract public function lazyTotalCost($id, int $invoice_status, int $page): array;
 
     abstract public function totalCost($id, int $invoice_status): array;
+
+    abstract public function ymUid($id, array $columns): array;
+    
+    abstract public function distinctClientDataById($id, array $columns): array;
+
 }

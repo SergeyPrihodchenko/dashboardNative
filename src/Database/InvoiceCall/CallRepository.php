@@ -34,5 +34,15 @@ class CallRepository extends PhoneClientRepository {
 
         return $data;
     }
+
+    public function ymUid($id, array $columns): array
+    {
+        throw new \Exception();
+    }
+    public function distinctClientDataById($id, array $columns): array
+    {
+        throw new \Exception();
+    }
+    
     
 }

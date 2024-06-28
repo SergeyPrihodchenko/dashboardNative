@@ -28,14 +28,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
     })
 
 
-    modalTable.addEventListener('scroll', (e) => {
-        const scrollTop = e.target.scrollTop
-        const scrollHeight = e.target.scrollHeight;
-        const clientHeight = e.target.clientHeight;
-        scrolling(scrollTop, scrollHeight, clientHeight, modalPage, mailAttr, siteAttr, modal)
-        modalPage++
-    })
-
     typeOption.addEventListener('change', (e) => {
         window.location.href = '/'+e.target.value
     });
@@ -55,10 +47,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     clientsTable.addEventListener('click', (e) => {
 
         if(e.target.classList.contains('btn_open_modal')) {
-            mailAttr = e.target.dataset.clientMail
-            siteAttr = e.target.dataset.site            
-            uploader(mailAttr, siteAttr, modalPage, modal)
-            modalPage++
+            modal.style.display = "block"
         }
             
     });

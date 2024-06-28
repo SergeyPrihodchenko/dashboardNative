@@ -91,25 +91,40 @@ a {
   /* Modal Content */
   /* The Close Button */
 }
-.modal .m_block_content {
+.modal .main_block {
   display: flex;
   flex-direction: column;
+  border: solid 1px black;
 }
-.modal .m_block_content .m_header {
-  height: 50px;
-  width: 100%;
-  border: solid 0.5px black;
-}
-.modal .m_block_content .block_display {
+.modal .main_block .header {
+  border: solid 1px black;
   display: flex;
-  flex-direction: row;
+  justify-content: space-around;
 }
-.modal .m_block_content .panel_dashboard {
+.modal .main_block .content_block {
   height: 100%;
   display: flex;
+  padding: 5px;
+}
+.modal .main_block .content_block .card_info {
+  display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: start;
-  align-items: start;
+  width: 400px;
+  border-right: solid 1px black;
+}
+.modal .main_block .content_block .card_events {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 700px;
+  overflow: auto;
+}
+.modal .main_block .content_block .card_events .card {
+  border: solid 1px black;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 .modal .modal-content {
   background-color: #fefefe;

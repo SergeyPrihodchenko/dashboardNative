@@ -8,7 +8,15 @@ class MailRepository extends SiteClientRepository {
 
     public function clientDataById($id, $columns): array
     {
-        $data = $data = $this->where("client_mail = '{$id}'", $columns);
+        $data = $data = $this->where(" client_mail = '{$id}' ", $columns);
+
+        return $data;
+
+    }
+
+    public function distinctClientDataById($id, $columns): array
+    {
+        $data = $data = $this->whereDistinct(" client_mail = '{$id}' ", $columns);
 
         return $data;
 
@@ -33,5 +41,10 @@ class MailRepository extends SiteClientRepository {
         $data = $this->lazyWhere("client_mail = '{$id}' AND invoice_status = '{$invoice_status}'", ['invoice_price'], $page);
 
         return $data;
+    }
+
+    public function ymUid($id, array $columns): array
+    {
+        throw new \Exception();
     }
 }

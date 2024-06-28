@@ -31,4 +31,12 @@ class VisitorsRepository extends Repository {
 
         return $data;
     }
+
+    public function distinctClientDataById($id, $columns): array
+    {
+        $data = $data = $this->whereDistinct(" client_id = '{$id}' ", $columns);
+
+        return $data;
+
+    }
 }

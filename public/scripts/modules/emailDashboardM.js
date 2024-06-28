@@ -71,7 +71,6 @@ export const uploader = (mail, site, page, modal) => {
                 body: data
             })
             .then(async res => {
-                modal.style.display = "block"
                 const data = await res.json()
                 const title = document.querySelector('.m_site_title')
                 const clientMail = document.querySelector('.m_client_mail')

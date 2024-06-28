@@ -2,12 +2,11 @@
 
 namespace S\P\Models\General;
 
-use Exception;
 use S\P\Http\Api\Yandex;
 use S\P\Models\InvoiceMail\Wika;
 use S\P\Models\Visitors\WikaVisitors;
 
-class General {
+class GeneralWika {
 
     private Yandex $yandex;
     private Wika $wika;
@@ -21,24 +20,21 @@ class General {
         $this->visitors = new WikaVisitors;
     }
 
-    public function setId(string $id, $settings): void
+    public function buildData(string $id)
     {
-        switch ($settings) {
-            case Wika::class:
-                $this->wika->setId($id);
-                break;
-            case WikaVisitors::class:
-                $this->visitors->setId($id);
-                break;
-            
-            default:
-                throw new \Exception('Dont right setting for : ' . self::class);
-                break;
-        }
-    }
+        $this->wika->setId($id);
+        $data1C = $this->wika->destinctFind(['client_id', 'client_code', 'client_mail', 'invoice_status', 'invoice_price', 'invoice_date']);
 
-    private function buildData()
-    {
-        
+        $client_id = $data1C[0]['client_id'];
+
+        $this->visitors->setId($client_id);
+        $ymId = $this->visitors->ymUid();
+
+        $dataMetric = $this->yandex->metricById($ymId)['data'];
+
+        $data['1c'] = $data1C;
+        $data['yandex'] = $dataMetric;
+
+        return $data;
     }
 }

@@ -44,6 +44,13 @@ abstract class Model {
         return $data;
     }
 
+    public function destinctFind($columns): array
+    {
+        $data = $this->repo->distinctClientDataById($this->id, $columns);
+
+        return $data;
+    }
+
     public function lazyAllUniqClients($columns, $page = 1): array
     {
         $data = $this->repo->lazyAllUniqClients($columns, $page);

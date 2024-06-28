@@ -47,7 +47,9 @@ final class Yandex {
             exit();
         }
 
-        if($result->getStatusCode() != '200') {
+        $status = $result->getStatusCode();
+
+        if($status != '200') {
 
             $counter = $counter + 1;
             sleep(3);
