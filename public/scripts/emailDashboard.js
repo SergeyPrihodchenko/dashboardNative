@@ -93,8 +93,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
                         if(key == 'yandex') {
                             cardTitle.textContent = key
                             const yandex = obj[key]
-                            for(key in yandex) {
-                                yandex[key].forEach(el => {
+                                yandex['dimensions'].forEach(el => {
                                     for(key in el) {
                                         const p = document.createElement('p')
                                         p.classList.add('card_title')
@@ -102,7 +101,12 @@ document.addEventListener('DOMContentLoaded', (e) => {
                                         card.appendChild(p)
                                     }
                                 })
-                            }
+                                yandex['metrics'].forEach(el => {
+                                    const p = document.createElement('p')
+                                    p.classList.add('card_title')
+                                    p.textContent = el
+                                    card.appendChild(p)
+                                })
                         }
                     }
                 });
