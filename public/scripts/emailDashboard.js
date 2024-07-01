@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
     clientsTable.addEventListener('click', (e) => {
         const data = new FormData
+        document.querySelector('.loader_block').style.display = 'flex'
         if(e.target.classList.contains('fa-eye')) {
             e = e.target.parentNode
             data.append('mail', e.dataset.clientMail)
@@ -140,6 +141,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
                         }
                     }
                 });
+                document.querySelector('.loader_block').style.display = 'none'
                 domEl.appendChild(cardGroup)
             }
         })

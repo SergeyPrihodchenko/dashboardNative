@@ -1,12 +1,16 @@
 export const mainEmailRender = (domElem, data, clear = true) => {
 
+    document.querySelector('.loader_block').style.display = 'flex'
+
     fetch('/emailDashboardData', {
         method: 'POST',
 
         body: data
     })
     .then(async res => {
-        
+
+        document.querySelector('.loader_block').style.display = 'none'
+
         if(clear) {
             domElem.innerHTML = '';
         }

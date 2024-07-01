@@ -39,6 +39,10 @@
                 </tr>
             </thead>
             <tbody class="email_tbody">
+                <div class="loader_block">
+                    <span class="loader">
+                    </span>
+                </div>
             </tbody>
         </table>
     </div>

@@ -13,6 +13,10 @@
                 <p class="general_metric"></p>
             </div>
             <div class="card_events">
+            <div class="loader_block">
+                    <span class="loader">
+                    </span>
+                </div>
             </div>
         </div>
     </div>
