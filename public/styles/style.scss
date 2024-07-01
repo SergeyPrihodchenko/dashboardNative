@@ -271,11 +271,15 @@ a {
                 }
 
                 .invoice_sum::before {
-                    content: "сумма оплат: ";
+                    content: "общая сумма оплат: ";
                 }
 
                 .client_id::before {
                     content: "id клиента: ";
+                }
+
+                .client_ym_id::before {
+                    content: "ym_uid клиента: ";
                 }
             }
 
@@ -326,6 +330,7 @@ a {
 
       /* Modal Content */
     .modal-content {
+        border-radius: 25px;
         background-color: #fefefe;
         margin: auto;
         padding: 20px;

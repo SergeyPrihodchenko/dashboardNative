@@ -8,7 +8,8 @@
                 <h2 class="client_mail"></h2>
                 <h3 class="client_code"></h3>
                 <h4 class="client_id"></h4>
-                <h4 class="invoice_sum">приобрел на сумму</h4>
+                <h4 class="client_ym_id"></h4>
+                <h4 class="invoice_sum"></h4>
                 <p class="general_metric"></p>
                 <p class="general_metric"></p>
             </div>

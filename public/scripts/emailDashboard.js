@@ -70,6 +70,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
             const response = await res.json()
             console.log(response);
 
+            document.querySelector('.client_ym_id').textContent = ''
+            
             const mail = response.clientMail
             const site = response.site
             const title = document.querySelector('.site_title')
@@ -123,8 +125,15 @@ document.addEventListener('DOMContentLoaded', (e) => {
                         if(key == 'yandex') {
                             cardTitle.textContent = key
                             const yandex = obj[key]
-                                yandex['dimensions'].forEach(el => {
+                                yandex['dimensions'].forEach((el, id) => {
+                                    if(id == 0) {
+                                        document.querySelector('.client_ym_id').textContent = ''
+                                        document.querySelector('.client_ym_id').textContent = el['name']
+                                    }
                                     for(key in el) {
+                                        if(id == 0) {
+                                            continue
+                                        }
                                         const p = document.createElement('p')
                                         p.classList.add(key)
                                         p.textContent = el[key]

@@ -201,10 +201,13 @@ a {
   justify-content: center;
 }
 .modal .main_block .content_block .card_info .invoice_sum::before {
-  content: "сумма оплат: ";
+  content: "общая сумма оплат: ";
 }
 .modal .main_block .content_block .card_info .client_id::before {
   content: "id клиента: ";
+}
+.modal .main_block .content_block .card_info .client_ym_id::before {
+  content: "ym_uid клиента: ";
 }
 .modal .main_block .content_block .card_events {
   display: flex;
@@ -236,6 +239,7 @@ a {
   content: "ДАТА ЗАКАЗА: ";
 }
 .modal .modal-content {
+  border-radius: 25px;
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
