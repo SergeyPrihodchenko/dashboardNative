@@ -13,12 +13,12 @@ a {
 
     height: 100px;
 
-    border: solid 1px black;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .m_block_table {
 
-    max-height: 700px;
+    max-height: 700px; 
     height: 100%;
     width: 100%;
 
@@ -118,10 +118,8 @@ a {
         display: flex;
         flex-direction: column;
 
-        border: solid 1px black;
 
         .header {
-            border: solid 1px black;
             display: flex;
             justify-content: space-around;
         }
@@ -139,7 +137,8 @@ a {
                 align-items: center;
                 justify-content: start;
                 width: 400px;
-                border-right: solid 1px black;
+                
+                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
             }
 
             .card_events {
@@ -151,11 +150,43 @@ a {
                 max-height: 700px;
                 overflow: auto;
 
+                .card_group {
+
+                    .card_group_title {
+
+                        padding-left: 5px;
+                    }
+                }
+
                 .card {
-                    border: solid 1px black;
+                    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
                     padding: 10px;
                     margin-bottom: 10px;
+
+                    .client_id::before {
+                        content: "ID КЛИЕНТА: ";
+                    }
+
+                    .client_code::before {
+                        content: "КОД КЛИЕНТА: ";
+                    }
+
+                    .client_mail::before {
+                        content: "ПОЧТА КЛИЕНТА: ";
+                    }
+
+                    .invoice_status::before {
+                        content: "СТАТУС ЗАКАЗА: ";
+                    }
+
+                    .invoice_price::before {
+                        content: "СУММА ЗАКАЗА: ";
+                    }
+
+                    .invoice_date::before {
+                        content: "ДАТА ЗАКАЗА: ";
+                    }
                 }
             }
         }
@@ -177,6 +208,7 @@ a {
         float: right;
         font-size: 28px;
         font-weight: bold;
+        padding: 5px;
     }
     
     .close:hover,

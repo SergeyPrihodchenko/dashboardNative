@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   margin: 0;
   padding: 0;
@@ -10,7 +11,7 @@ a {
 .header {
   width: 100%;
   height: 100px;
-  border: solid 1px black;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .m_block_table {
@@ -94,10 +95,8 @@ a {
 .modal .main_block {
   display: flex;
   flex-direction: column;
-  border: solid 1px black;
 }
 .modal .main_block .header {
-  border: solid 1px black;
   display: flex;
   justify-content: space-around;
 }
@@ -112,7 +111,7 @@ a {
   align-items: center;
   justify-content: start;
   width: 400px;
-  border-right: solid 1px black;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .modal .main_block .content_block .card_events {
   display: flex;
@@ -121,10 +120,31 @@ a {
   max-height: 700px;
   overflow: auto;
 }
+.modal .main_block .content_block .card_events .card_group .card_group_title {
+  padding-left: 5px;
+}
 .modal .main_block .content_block .card_events .card {
-  border: solid 1px black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 10px;
   margin-bottom: 10px;
+}
+.modal .main_block .content_block .card_events .card .client_id::before {
+  content: "ID КЛИЕНТА: ";
+}
+.modal .main_block .content_block .card_events .card .client_code::before {
+  content: "КОД КЛИЕНТА: ";
+}
+.modal .main_block .content_block .card_events .card .client_mail::before {
+  content: "ПОЧТА КЛИЕНТА: ";
+}
+.modal .main_block .content_block .card_events .card .invoice_status::before {
+  content: "СТАТУС ЗАКАЗА: ";
+}
+.modal .main_block .content_block .card_events .card .invoice_price::before {
+  content: "СУММА ЗАКАЗА: ";
+}
+.modal .main_block .content_block .card_events .card .invoice_date::before {
+  content: "ДАТА ЗАКАЗА: ";
 }
 .modal .modal-content {
   background-color: #fefefe;
@@ -138,6 +158,7 @@ a {
   float: right;
   font-size: 28px;
   font-weight: bold;
+  padding: 5px;
 }
 .modal .close:hover,
 .modal .close:focus {

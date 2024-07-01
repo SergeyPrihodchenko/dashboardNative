@@ -65,7 +65,7 @@ class ClientsDashboardController {
                 break;
         }
 
-        $allClients = $client->lazyAllUniqClients(['client_mail', 'client_id'], (int)$page);
+        $allClients = $client->lazyAllUniqClients(['client_mail'], (int)$page);
         foreach ($allClients as $key => $dataClient) {
             
             $client->setId($dataClient['client_mail']);

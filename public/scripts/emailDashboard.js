@@ -63,8 +63,15 @@ document.addEventListener('DOMContentLoaded', (e) => {
             const site = response.site
             const domEl = modal.querySelector('.card_events')
             domEl.innerHTML = ''
+            const title = document.querySelector('.site_title')
+            const titleMail = document.querySelector('.client_mail')
+            const clientCode = document.querySelector('.client_code')
+            title.textContent = site
+            titleMail.textContent = mail
 
             for(let key in response.data) {
+
+
                 const cardGroup = document.createElement('div')
                 cardGroup.classList.add('card_group')
                 const cardGroupTitle = document.createElement('h4')
@@ -80,11 +87,12 @@ document.addEventListener('DOMContentLoaded', (e) => {
                     card.appendChild(cardTitle)
                     for(let key in obj) {
                         if(key == '1C') {
+                            clientCode.textContent = obj[key].client_code
                             cardTitle.textContent = key
                             const object = obj[key]
                             for(let key in object) {
                                 const p = document.createElement('p')
-                                p.classList.add('card_title')
+                                p.classList.add(key)
                                 p.textContent = object[key]
                                 card.appendChild(p)
                             }
@@ -96,15 +104,16 @@ document.addEventListener('DOMContentLoaded', (e) => {
                                 yandex['dimensions'].forEach(el => {
                                     for(key in el) {
                                         const p = document.createElement('p')
-                                        p.classList.add('card_title')
+                                        p.classList.add(key)
                                         p.textContent = el[key]
                                         card.appendChild(p)
                                     }
                                 })
-                                yandex['metrics'].forEach(el => {
+                                yandex['metrics'].forEach((el, key) => {
+                                    const metricTitle = ['посещения', 'пользователи']
                                     const p = document.createElement('p')
-                                    p.classList.add('card_title')
-                                    p.textContent = el
+                                    p.classList.add('metric')
+                                    p.textContent = metricTitle[key] + " : " + el
                                     card.appendChild(p)
                                 })
                         }

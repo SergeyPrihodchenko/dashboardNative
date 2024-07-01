@@ -9,6 +9,7 @@
         <div class="panel_dashboard">
             <h1><?=$site?></h1>
         <select class="sites_option" name="sites">
+        <option>сайты</option>
             <?php
                 foreach ($sites as $site) {
                    echo <<<HTML
