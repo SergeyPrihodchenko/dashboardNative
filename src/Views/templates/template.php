@@ -9,5 +9,6 @@
 <body>
     <?=$content?>
     <script type="module" src="<?=$script?>"></script>
+    <script src="https://kit.fontawesome.com/da206e7075.js" crossorigin="anonymous"></script>
 </body>
 </html>

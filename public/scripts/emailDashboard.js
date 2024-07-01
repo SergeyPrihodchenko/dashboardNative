@@ -12,9 +12,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
     let mainPage = 1;
     let modalPage = 1;
 
-    let siteAttr = ''
-    let mailAttr = ''
-
     mainEmailRender(clientsTable, {page: mainPage})
 
     siteOption.addEventListener('change', (e) => {
@@ -45,12 +42,25 @@ document.addEventListener('DOMContentLoaded', (e) => {
     }
 
     clientsTable.addEventListener('click', (e) => {
-
         const data = new FormData
-        data.append('mail', e.target.dataset.clientMail)
-        data.append('site', e.target.dataset.site)
-        data.append('id', e.target.dataset.clientId)
-        console.log(e.target.dataset.clientId, e.target.dataset.site, e.target.dataset.clientMail);
+        if(e.target.classList.contains('fa-eye')) {
+            e = e.target.parentNode
+            data.append('mail', e.dataset.clientMail)
+            data.append('site', e.dataset.site)
+            data.append('id', e.dataset.clientId)
+        } else {
+           if(e.target.classList.contains('btn_open_modal')) {
+            e = e.target
+            data.append('mail', e.dataset.clientMail)
+            data.append('site', e.dataset.site)
+            data.append('id', e.dataset.clientId)
+           } else {
+            return
+           }
+        }
+        const domEl = modal.querySelector('.card_events')
+        domEl.innerHTML = ''
+
         fetch('/emailClientCard', {
             method: 'POST',
             body: data
@@ -61,8 +71,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
             const mail = response.clientMail
             const site = response.site
-            const domEl = modal.querySelector('.card_events')
-            domEl.innerHTML = ''
             const title = document.querySelector('.site_title')
             const titleMail = document.querySelector('.client_mail')
             const clientCode = document.querySelector('.client_code')
@@ -71,7 +79,10 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
             for(let key in response.data) {
 
-
+                if(key == 'invoice_sum') {
+                    document.querySelector('.invoice_sum').textContent = response.data[key]
+                    continue
+                }
                 const cardGroup = document.createElement('div')
                 cardGroup.classList.add('card_group')
                 const cardGroupTitle = document.createElement('h4')
@@ -91,6 +102,16 @@ document.addEventListener('DOMContentLoaded', (e) => {
                             cardTitle.textContent = key
                             const object = obj[key]
                             for(let key in object) {
+                                if(key == 'client_id') {
+                                    document.querySelector('.'+key).innerHTML = object[key]  
+                                    continue
+                                }
+                                if(key == 'client_code') {
+                                    continue
+                                }
+                                if(key == 'client_mail') {
+                                    continue
+                                }
                                 const p = document.createElement('p')
                                 p.classList.add(key)
                                 p.textContent = object[key]
@@ -125,7 +146,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         .catch(err => {
             console.log(err);
         })
-        if(e.target.classList.contains('btn_open_modal')) {
+        if(e.classList.contains('btn_open_modal')) {
             modal.style.display = "block"
         }
             

@@ -52,7 +52,7 @@ final class Yandex {
         if($status != '200') {
 
             $counter = $counter + 1;
-            sleep(3);
+            sleep(1);
 
             $this->fetch($id, $counter);
 

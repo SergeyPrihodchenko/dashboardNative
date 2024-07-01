@@ -7,21 +7,21 @@
     <?=$modal?>
     <div class="block_dashboar">
         <div class="panel_dashboard">
-            <h1><?=$site?></h1>
-        <select class="sites_option" name="sites">
-        <option>сайты</option>
-            <?php
-                foreach ($sites as $site) {
-                   echo <<<HTML
-                    <option value="$site">$site</option>
-                   HTML;
-                }
-            ?>
-        </select>
-        <select class="type_option" name="select">
-            <option selected value="">Email</option>
-            <option value="sateli">Phone</option>
-        </select>
+            <h1 class="header_title"></h1>
+            <select class="sites_option" name="sites">
+            <option>сайты</option>
+                <?php
+                    foreach ($sites as $site) {
+                    echo <<<HTML
+                        <option value="$site">$site</option>
+                    HTML;
+                    }
+                ?>
+            </select>
+            <select class="type_option" name="select">
+                <option selected value="">Email</option>
+                <option value="sateli">Phone</option>
+            </select>
         </div>
     </div>
     <div class="block_table">
@@ -30,11 +30,11 @@
                 <tr>
                     <th></th>
                     <th>Email</th>
-                    <th>количество созданных счетов</th>
+                    <th>счет создан</th>
+                    <th>выставлен клиенту на оплату</th>
+                    <th>пришла оплата</th>
                     <th>сумма созданных счетов</th>
-                    <th>количество выставленных счетов</th>
-                    <th>сумма выставленных счетов</th>
-                    <th>количество оплаченных счетов</th>
+                    <th>выставленная сумма на оплату</th>
                     <th>сума оплаченных счетов</th>
                 </tr>
             </thead>

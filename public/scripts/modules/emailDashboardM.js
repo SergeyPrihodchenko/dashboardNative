@@ -11,8 +11,9 @@ export const mainEmailRender = (domElem, data, clear = true) => {
             domElem.innerHTML = '';
         }
 
-        const data = await res.json();
 
+        const data = await res.json();
+        document.querySelector('.header_title').textContent = data.paramSite
         data.clients.map((el) => {
         const tdLink = document.createElement('td');
         const tr = document.createElement('tr');
@@ -21,7 +22,7 @@ export const mainEmailRender = (domElem, data, clear = true) => {
         tdLink.dataset.clientMail = el.client_mail
         tdLink.dataset.clientId = el.client_id
         tdLink.classList.add('btn_open_modal')
-        tdLink.innerHTML = '&#11162'
+        tdLink.innerHTML = '<i class="fa-solid fa-eye"></i>'
         tr.appendChild(tdLink)
     
         for (const key in el) {

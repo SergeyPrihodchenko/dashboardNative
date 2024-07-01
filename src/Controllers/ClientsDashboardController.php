@@ -67,14 +67,13 @@ class ClientsDashboardController {
 
         $allClients = $client->lazyAllUniqClients(['client_mail'], (int)$page);
         foreach ($allClients as $key => $dataClient) {
-            
             $client->setId($dataClient['client_mail']);
-            $allClients[$key]['createdBill'] = $client->totalCostByStatus(0)['bill'];
-            $allClients[$key]['outputBill'] = $client->totalCostByStatus(1)['bill'];
-            $allClients[$key]['closeBill'] = $client->totalCostByStatus(2)['bill'];
             $allClients[$key]['countCreatedBill'] = $client->totalCostByStatus(0)['countBills'];
             $allClients[$key]['countOutputBill'] = $client->totalCostByStatus(1)['countBills'];
             $allClients[$key]['countCloseBill'] = $client->totalCostByStatus(2)['countBills'];
+            $allClients[$key]['createdBill'] = $client->totalCostByStatus(0)['bill'];
+            $allClients[$key]['outputBill'] = $client->totalCostByStatus(1)['bill'];
+            $allClients[$key]['closeBill'] = $client->totalCostByStatus(2)['bill'];
         }
 
         $data['clients'] = $allClients;
