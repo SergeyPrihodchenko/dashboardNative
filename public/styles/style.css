@@ -1,4 +1,26 @@
 @charset "UTF-8";
+.modal .main_block .content_block .card_events .card .invoice_date::before, .modal .main_block .content_block .card_events .card .invoice_price::before, .modal .main_block .content_block .card_events .card .invoice_status::before, .modal .main_block .content_block .card_info .client_ym_id::before, .modal .main_block .content_block .card_info .client_id::before, .modal .main_block .content_block .card_info .invoice_sum::before, .modal .main_block .content_block .card_info .client_mail::before, .modal .main_block .content_block .card_info .client_code::before, .modal .main_block .content_block .card_info .site_title::before {
+  color: rgb(130, 130, 130);
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0%;
+  text-align: left;
+  margin-right: 20px;
+}
+
+.modal .main_block .content_block .card_events .card .invoice_date, .modal .main_block .content_block .card_events .card .invoice_price, .modal .main_block .content_block .card_events .card .invoice_status, .modal .main_block .content_block .card_info .client_id, .modal .main_block .content_block .card_info .client_mail, .modal .main_block .content_block .card_info .client_code {
+  color: rgb(0, 0, 0);
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0%;
+  text-align: left;
+  margin-left: 10px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -173,20 +195,17 @@ a {
 .modal .main_block .content_block .card_info {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   justify-content: start;
   width: 400px;
   margin-right: 10px;
+  padding-left: 10px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
-.modal .main_block .content_block .card_info .client_code {
-  text-align: center;
-}
-.modal .main_block .content_block .card_info .client_mail {
-  text-align: center;
-}
-.modal .main_block .content_block .card_info .client_id {
-  text-align: center;
+.modal .main_block .content_block .card_info .site_title::before {
+  content: "название сайта";
+  display: flex;
+  flex-direction: column;
 }
 .modal .main_block .content_block .card_info .client_code::before {
   content: "код клиента: ";
@@ -201,13 +220,22 @@ a {
   justify-content: center;
 }
 .modal .main_block .content_block .card_info .invoice_sum::before {
-  content: "общая сумма оплат: ";
+  content: "общая сумма оплат ";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .modal .main_block .content_block .card_info .client_id::before {
   content: "id клиента: ";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .modal .main_block .content_block .card_info .client_ym_id::before {
   content: "ym_uid клиента: ";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .modal .main_block .content_block .card_events {
   display: flex;
@@ -217,26 +245,49 @@ a {
   overflow: auto;
 }
 .modal .main_block .content_block .card_events .card_group {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .modal .main_block .content_block .card_events .card_group .card_group_title {
   padding: 5px 5px 0 5px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
+  color: rgb(0, 0, 0);
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: 0%;
+  text-align: left;
 }
 .modal .main_block .content_block .card_events .card {
+  box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.45) 0px 1px 0px inset;
   border-radius: 15px;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   padding: 10px;
   margin: 10px;
 }
+.modal .main_block .content_block .card_events .card:last-child {
+  box-shadow: none;
+}
+.modal .main_block .content_block .card_events .card .card_title {
+  color: rgb(0, 0, 0);
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: 0%;
+  text-align: left;
+}
 .modal .main_block .content_block .card_events .card .invoice_status::before {
-  content: "СТАТУС ЗАКАЗА: ";
+  content: "статус заказа: ";
 }
 .modal .main_block .content_block .card_events .card .invoice_price::before {
-  content: "СУММА ЗАКАЗА: ";
+  content: "сумма заказа: ";
 }
 .modal .main_block .content_block .card_events .card .invoice_date::before {
-  content: "ДАТА ЗАКАЗА: ";
+  content: "дата заказа: ";
 }
 .modal .modal-content {
   border-radius: 25px;

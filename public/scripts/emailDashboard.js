@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
     span.onclick = function() {
         modal.style.display = "none";
+        document.querySelector('.loader').style.display = 'none'
         modalPage = 1
     }
 
@@ -122,7 +123,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
                             }
                         } 
                        
-                        if(key == 'yandex') {
+                        if(key == 'Яндекс') {
                             cardTitle.textContent = key
                             const yandex = obj[key]
                                 yandex['dimensions'].forEach((el, id) => {

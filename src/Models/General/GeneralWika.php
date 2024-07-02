@@ -41,7 +41,7 @@ class GeneralWika {
                     $data1C[$key]['invoice_status'] = 'выставлен клиенту на оплату';
                     break;
                 case '2':
-                    $data1C[$key]['invoice_status'] = 'выставлен клиенту на оплату';
+                    $data1C[$key]['invoice_status'] = 'пришла оплата';
                     break;
             }
 
@@ -73,7 +73,7 @@ class GeneralWika {
         }
         
         foreach ($dataMetric as $value) {
-            $data[date("Y-m-d", strtotime($value['dimensions'][1]['name']))][] = ['yandex' => $value];
+            $data[date("Y-m-d", strtotime($value['dimensions'][1]['name']))][] = ['Яндекс' => $value];
         }
 
         return $data;
